@@ -36,7 +36,10 @@ dynamics) to consider. Other types available are:
   \item{MERW normalized Laplacian}{the maximal-entropy random walk (RW)
     normalized Laplacian; it governs stochastic walks on the network,
     in which the random walker moves according to a maximal-entropy RW [1].}
-}}
+}
+Note that you can type abbreviations, e.g. "L", "N", "Q", "M" for the
+respective types (case is ignored). The argument match is done through
+\code{\link[strex]{match_arg}}.}
 
 \item{weights}{edge weights, representing the strength/intensity (not the cost!) of each link.
 if weights is NULL (the default) and g has an edge attribute called weight, then

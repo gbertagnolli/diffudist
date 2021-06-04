@@ -72,7 +72,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>The <code>diffudist</code> package provides the functions for the evaluation of the diffusion distance between nodes of a complex network.</p>
+<p>The <code>diffudist</code> package provides several functions for evaluating the diffusion distance between nodes of a complex network.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -85,8 +85,32 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p><code><a href="https://rdrr.io/r/base/library.html">library(diffudist)</a></code> will load the functions of the package.</p>
-<p>You will also need to load igraph <code><a href="https://igraph.org">library(igraph)</a></code>, because the main arguments of the functions in <code>diffudist</code> are networks, in the igraph format.</p>
+<p>Additionally to <code>diffudist</code> you will also need the <code>igraph</code> package, because the main arguments of the functions in <code>diffudist</code> are networks as <code>igraph</code> objects.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">diffudist</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></code></pre></div>
+<div id="examples" class="section level3">
+<h3 class="hasAnchor">
+<a href="#examples" class="anchor"></a>Examples</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/sample_pa.html">sample_pa</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, power <span class="op">=</span> <span class="fl">1</span>, m <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_distance_matrix.html">get_DDM</a></span><span class="op">(</span><span class="va">g</span>, tau <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"Normalized Laplacian"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; Unweighted network.</span>
+<span class="co">#&gt; Evaluating the Normalized Laplacian matrix</span>
+<span class="va">MERW_Pt</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_diffusion_probability_matrix.html">get_diffu_Pt</a></span><span class="op">(</span><span class="va">g</span>, tau <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="op">)</span>
+<span class="co">#&gt; Unweighted network.</span>
+<span class="co">#&gt; Evaluating the Normalized Laplacian matrix</span></code></pre></div>
+<p>The probability transition matrix returned from <code>get_diffusion_probability_matrix</code> (or its shortened version <code>get_diffu_Pt</code>) is the matrix <em>e</em><sup> − *τ**L<em><sub>rw</sub></em></sup>. The diffusion dynamics is controlled by the specific Laplacian matrix L<em><sub>rw</sub> = </em>I<em> − </em>T<em><sub>rw</sub>, where </em>T*<sub>rw</sub> is the jump matrix of the discrete-time random walk corresponding to our continuous-time dynamics.</p>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<p>Bertagnolli, G., &amp; De Domenico, M. (2021). <em>Diffusion geometry of multiplex and interdependent systems</em>. Physical Review E, 103(4),</p>
+<ol>
+<li>
+<a href="https://doi.org/10.1103/PhysRevE.103.042301">DOI: 10.1103/PhysRevE.103.042301</a>, <a href="https://arxiv.org/abs/2006.13032">arXiv: 2006.13032</a>, <a href="https://gbertagnolli.github.io/publication/ml-diffusion/">my-website</a>.</li>
+</ol>
 </div>
 </div>
   </div>
@@ -110,6 +134,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/gbertagnolli/diffudist/actions"><img src="https://github.com/gbertagnolli/diffudist/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 </div>

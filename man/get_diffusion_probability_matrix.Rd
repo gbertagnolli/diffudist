@@ -35,7 +35,23 @@ get_diffu_Pt(
 
 \item{tau}{diffusion time}
 
-\item{type}{c("Normalized Laplacian", "Quantum Laplacian")}
+\item{type}{default "Normalized Laplacian". The type of Laplacian (i.e. of
+dynamics) to consider. Other types available are:
+\describe{
+  \item{Laplacian}{for the classical combinatorial Laplacian matrix;
+    it governs the diffusion dynamics on the network}
+  \item{Normalized Laplacian}{for the Laplacian matrix normalized by degree
+    matrix, the so-called classical random walk normalized Laplacian;
+    it governs stochastic walks on the network}
+  \item{Quantum Laplacian}{for the Laplacian matrix normalized to be
+    symmetric; it governs quantum walks on the network}
+  \item{MERW normalized Laplacian}{the maximal-entropy random walk (RW)
+    normalized Laplacian; it governs stochastic walks on the network,
+    in which the random walker moves according to a maximal-entropy RW [1].}
+}
+Note that you can type abbreviations, e.g. "L", "N", "Q", "M" for the
+respective types (case is ignored). The argument match is done through
+\code{\link[strex]{match_arg}}.}
 
 \item{weights}{edge weights, representing the strength/intensity (not the cost!) of each link.
 if weights is NULL (the default) and g has an edge attribute called weight, then
