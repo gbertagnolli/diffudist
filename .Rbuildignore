@@ -1,0 +1,7 @@
+^diffudist\.Rproj$
+^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^Readme.Rmd
+^\.github$

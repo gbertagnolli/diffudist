@@ -1,0 +1,47 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/"
+)
+```
+
+# diffudist <img src="man/figures/logo.png" align="right" />
+
+
+<!-- badges: start -->
+  [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+  <!-- badges: end -->
+
+<!-- badges: start -->
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/tidyverse)](https://cran.r-project.org/package=tidyverse) -->
+<!-- [![Travis build status](https://travis-ci.org/tidyverse/tidyverse.svg?branch=master)](https://travis-ci.org/tidyverse/tidyverse) -->
+<!-- [![Codecov test coverage](https://codecov.io/gh/tidyverse/tidyverse/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/tidyverse?branch=master) -->
+<!-- badges: end -->
+
+## Overview
+
+The `diffudist` package provides the functions for the evaluation of the diffusion distance between nodes of a complex network.
+
+## Installation
+
+```{r, echo = 4:5, eval = FALSE}
+# Install from CRAN
+install.packages("diffudist")
+
+# Or the development version from GitHub
+# install.packages("devtools")
+devtools::install_github("gbertagnolli/diffudist")
+```
+
+## Usage
+
+`library(diffudist)` will load the functions of the package.
+
+You will also need to load igraph `library(igraph)`, because the main arguments of the functions in `diffudist` are networks, in the igraph format.

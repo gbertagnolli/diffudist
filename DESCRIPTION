@@ -1,0 +1,38 @@
+Package: diffudist
+Title: Diffusion distance for complex networks
+Version: 1.1
+Authors@R: c(
+    person(given = "Giulia",
+           family = "Bertagnolli",
+           role = c("aut", "cre"),
+           email = "giulia.bertagnolli@gmail.com",
+           comment = c(ORCID = "0000-0001-8637-0632")),
+    person(given = "Manlio", 
+           family = "De Domenico", 
+           role = "aut", 
+           email = "mdedomenico@fbk.eu", 
+           comment = c(ORCID = "0000-0001-5158-8594"))
+           )
+Description: Computing the diffusion distance for complex single-layer networks.
+    Given a network one can obtain different types of Laplacian (or transition)
+    matrices corresponding to different continuous-time random walks dynamics, i.e., 
+    continuous-time Markov chians on the vertex set. This package enables the evaluation of 
+    Laplacians, stochastic matrices, and the corresponding diffusion distance matrices.
+Depends: R (>= 3.5.0)
+Imports:
+    compiler,
+    expm,
+    igraph,
+    Matrix,
+    Rcpp, 
+    RcppEigen
+Suggests:
+    parallelDist,
+    strex
+License: GPL (>=2)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+LinkingTo: 
+    RcppEigen,
+    Rcpp
