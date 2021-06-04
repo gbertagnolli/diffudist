@@ -12,8 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# diffudist <img src="man/figures/logo.png" align="right" />
-
+# diffudist <img src="man/figures/diffudist.png" align="right" alt="" width="120"/>
 
 <!-- badges: start -->
   [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -25,7 +24,7 @@ The `diffudist` package provides the functions for the evaluation of the diffusi
 
 ## Installation
 
-```{r, echo = 4:5, eval = FALSE}
+```{r, echo = 4:6, eval = FALSE}
 # Install from CRAN
 install.packages("diffudist")
 
