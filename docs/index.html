@@ -65,7 +65,7 @@
   <div class="contents col-md-9">
 <div id="diffudist-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#diffudist-" class="anchor"></a>diffudist <img src="reference/figures/diffudist.png" align="right" alt="" width="120">
+<a href="#diffudist-" class="anchor"></a>diffudist <img src="reference/figures/diffudist.png" align="right" alt="" width="150">
 </h1></div>
 <!-- badges: start -->
 
@@ -88,19 +88,97 @@
 <p>Additionally to <code>diffudist</code> you will also need the <code>igraph</code> package, because the main arguments of the functions in <code>diffudist</code> are networks as <code>igraph</code> objects.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">diffudist</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/igraph_options.html">igraph_options</a></span><span class="op">(</span>
+  vertex.frame.color <span class="op">=</span> <span class="st">"white"</span>,
+  vertex.color <span class="op">=</span> <span class="st">"#00B4A6"</span>,
+  label.family <span class="op">=</span> <span class="st">"sans-serif"</span><span class="op">)</span></code></pre></div>
 <div id="examples" class="section level3">
 <h3 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/sample_pa.html">sample_pa</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, power <span class="op">=</span> <span class="fl">1</span>, m <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_distance_matrix.html">get_DDM</a></span><span class="op">(</span><span class="va">g</span>, tau <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"Normalized Laplacian"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">100</span>
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/sample_pa.html">sample_pa</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">N</span>, power <span class="op">=</span> <span class="fl">1</span>, m <span class="op">=</span> <span class="fl">2</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">deg_g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
+<span class="va">vertex_labels</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="va">N</span>
+<span class="va">vertex_labels</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">deg_g</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">deg_g</span>, <span class="fl">.75</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">g</span>, vertex.label <span class="op">=</span> <span class="va">vertex_labels</span>, vertex.size <span class="op">=</span> <span class="fl">6</span> <span class="op">+</span> <span class="fl">10</span> <span class="op">*</span> <span class="op">(</span><span class="va">deg_g</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">deg_g</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">deg_g</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/plot-g-1.png"><!-- --></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_distance_matrix.html">get_DDM</a></span><span class="op">(</span><span class="va">g</span>, tau <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"Normalized Laplacian"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Unweighted network.</span>
 <span class="co">#&gt; Evaluating the Normalized Laplacian matrix</span>
-<span class="va">MERW_Pt</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_diffusion_probability_matrix.html">get_diffu_Pt</a></span><span class="op">(</span><span class="va">g</span>, tau <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="op">)</span>
+<span class="va">MERW_Pt</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_diffusion_probability_matrix.html">get_diffu_Pt</a></span><span class="op">(</span><span class="va">g</span>, tau <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"MERW"</span><span class="op">)</span>
 <span class="co">#&gt; Unweighted network.</span>
-<span class="co">#&gt; Evaluating the Normalized Laplacian matrix</span></code></pre></div>
+<span class="co">#&gt; Evaluating the MERW Normalized Laplacian matrix</span></code></pre></div>
 <p>The probability transition matrix returned from <code>get_diffusion_probability_matrix</code> (or its shortened version <code>get_diffu_Pt</code>) is the matrix <em>e</em><sup> − *τ**L<em><sub>rw</sub></em></sup>. The diffusion dynamics is controlled by the specific Laplacian matrix L<em><sub>rw</sub> = </em>I<em> − </em>T<em><sub>rw</sub>, where </em>T*<sub>rw</sub> is the jump matrix of the discrete-time random walk corresponding to our continuous-time dynamics.</p>
+<p>Let us check that <code>MERW_Pt</code> is an actual stochastic (transition) matrix, i.e., that its rows are probability vectors</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">MERW_Pt</span><span class="op">)</span>  <span class="op">-</span> <span class="va">N</span> <span class="op">&gt;</span> <span class="fl">1e-6</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"MERW_Pt is not a stochastic matrix"</span><span class="op">)</span>
+<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"MERW_Pt is a stochastic matrix"</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="co">#&gt; [1] "MERW_Pt is a stochastic matrix"</span></code></pre></div>
+<p>Compute diffusion distances from the Probability matrix <code>MERW_Pt</code> as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"parallelDist"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="co"># parallel dist</span>
+  <span class="va">D_MERW</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu">parallelDist</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/parallelDist/man/parDist.html">parDist</a></span><span class="op">(</span><span class="va">MERW_Pt</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+  <span class="co"># dist</span>
+  <span class="va">D_MERW</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">MERW_Pt</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<p>And finally plot the distance matrices (requires <code>ggplt2</code>)</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"tidyverse"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+  <span class="va">plot_ddm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">ddm</span>, <span class="va">clustering</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">N</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ddm</span><span class="op">)</span>
+    <span class="fu">as_tibble</span><span class="op">(</span><span class="va">ddm</span><span class="op">)</span> <span class="op">%&gt;%</span>
+      <span class="fu">add_column</span><span class="op">(</span><span class="st">"from"</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">N</span>, .before <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
+      <span class="fu">gather</span><span class="op">(</span>key <span class="op">=</span> <span class="va">to</span>, value <span class="op">=</span> <span class="va">value</span>, <span class="op">-</span><span class="va">from</span>, factor_key <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+      <span class="fu">mutate</span><span class="op">(</span>
+        <span class="st">"to"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"V"</span>, replacement <span class="op">=</span> <span class="st">""</span>, x <span class="op">=</span> <span class="va">to</span><span class="op">)</span><span class="op">)</span>,
+        <span class="st">"value"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>
+      <span class="op">)</span> <span class="op">%&gt;%</span>
+      <span class="fu">ggplot</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">to</span>, y <span class="op">=</span> <span class="va">from</span>, fill <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+        <span class="fu">geom_tile</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+        <span class="fu">coord_equal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+        <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> 
+        <span class="fu">scale_y_reverse</span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">N</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">10</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+        <span class="fu">scale_x_continuous</span><span class="op">(</span>position <span class="op">=</span> <span class="st">"top"</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">N</span>, <span class="fl">10</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+        <span class="fu">scale_fill_distiller</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Spectral"</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">ddm</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+        <span class="fu">guides</span><span class="op">(</span>fill <span class="op">=</span> <span class="fu">guide_colourbar</span><span class="op">(</span>barwidth <span class="op">=</span> <span class="fl">1</span>, barheight <span class="op">=</span> <span class="fl">10</span>, nbin <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+        <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+        <span class="fu">theme</span><span class="op">(</span>
+          panel.grid.minor <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>, 
+          panel.grid.major <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>, 
+          axis.text.x <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,
+          axis.text.y <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">pl</span>
+      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">pl</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+  <span class="va">plot_ddm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">ddm</span>, <span class="va">clustering</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">gplots</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="va">D</span>, distfun <span class="op">=</span> <span class="va">as.dist</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">plot_ddm</span><span class="op">(</span><span class="va">D</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/plot_CRW-1.png"><!-- --></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">plot_ddm</span><span class="op">(</span><span class="va">D_MERW</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/plot_MERW-1.png"><!-- --></p>
+<div id="plot-with-hierarchical-clustering" class="section level5">
+<h5 class="hasAnchor">
+<a href="#plot-with-hierarchical-clustering" class="anchor"></a>Plot with hierarchical clustering</h5>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">gplots</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="va">D</span>, distfun <span class="op">=</span> <span class="va">as.dist</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-7-1.png"><!-- --></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">gplots</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="va">D_MERW</span>, distfun <span class="op">=</span> <span class="va">as.dist</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-7-2.png"><!-- --></p>
+</div>
 </div>
 </div>
 <div id="references" class="section level2">

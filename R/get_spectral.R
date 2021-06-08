@@ -77,8 +77,11 @@ get_spectral_decomp <- function(g, type = "Normalized Laplacian", verbose = F) {
 get_ddm_from_eigendec <- function(tau, Q, Q_inv, lambdas,
                                   verbose = FALSE) {
   Nodes <- length(lambdas)
-  expL <- eigenMatMult(eigenMatMult(Q, as.matrix(diag(exp(-tau * lambdas)))), Q_inv)
+  expL <- eigenMapMatMult(eigenMapMatMult(Q, as.matrix(diag(exp(-tau * lambdas)))), Q_inv)
   # expL <- Q %*% diag(exp(-tau * lambdas)) %*% Q_inv
+  if (abs(sum(expL) - Nodes) > 1e-6) {
+    stop("expL is not a stochastic matrix! Check the row sums.")
+  }
   if (verbose) {
     cat(paste("Building distance matrix...\n"))
   }

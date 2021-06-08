@@ -6,6 +6,18 @@
 
 using namespace Rcpp;
 
+// eigenMapMatMult
+Eigen::MatrixXd eigenMapMatMult(const Eigen::Map<Eigen::MatrixXd> A, Eigen::Map<Eigen::MatrixXd> B);
+RcppExport SEXP _diffudist_eigenMapMatMult(SEXP ASEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd> >::type A(ASEXP);
+    Rcpp::traits::input_parameter< Eigen::Map<Eigen::MatrixXd> >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(eigenMapMatMult(A, B));
+    return rcpp_result_gen;
+END_RCPP
+}
 // eigenMatMult
 Eigen::MatrixXd eigenMatMult(Eigen::MatrixXd A, Eigen::MatrixXd B);
 RcppExport SEXP _diffudist_eigenMatMult(SEXP ASEXP, SEXP BSEXP) {
@@ -20,6 +32,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_diffudist_eigenMapMatMult", (DL_FUNC) &_diffudist_eigenMapMatMult, 2},
     {"_diffudist_eigenMatMult", (DL_FUNC) &_diffudist_eigenMatMult, 2},
     {NULL, NULL, 0}
 };

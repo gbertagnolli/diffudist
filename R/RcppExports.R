@@ -8,6 +8,17 @@
 #' @param B numeric matrix of dimension \eqn{n \times l}
 #' @return C matrix of dimension \eqn{m \times p} of the row-column product of A and B and C
 #' @export
+eigenMapMatMult <- function(A, B) {
+    .Call(`_diffudist_eigenMapMatMult`, A, B)
+}
+
+#' Matrix Multiplication using RcppEigen
+#'
+#' Matrix multiplication of three matrices in input.
+#' @param A numeric matrix of dimension \eqn{m \times n}
+#' @param B numeric matrix of dimension \eqn{n \times l}
+#' @return C matrix of dimension \eqn{m \times p} of the row-column product of A and B and C
+#' @export
 eigenMatMult <- function(A, B) {
     .Call(`_diffudist_eigenMatMult`, A, B)
 }
