@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • diffudist</title>
+<title>Plot distance matrix — plot_distance_matrix • diffudist</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Plot distance matrix — plot_distance_matrix" />
+<meta property="og:description" content="Plot a heatmap of the distance matrix using ggplot. Useful if used with multiplot ([source](http://stackoverflow.com/questions/6673162/reproducing-lattice-dendrogram-graph-with-ggplot2))" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -100,108 +101,65 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Plot distance matrix</h1>
+    
+    <div class="hidden name"><code>plot_distance_matrix.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Plot a heatmap of the distance matrix using ggplot. Useful if used with multiplot ([source](http://stackoverflow.com/questions/6673162/reproducing-lattice-dendrogram-graph-with-ggplot2))</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>plot_distance_matrix</span><span class='op'>(</span>
+  <span class='va'>DM</span>,
+  col_palette <span class='op'>=</span> <span class='fu'>viridis</span><span class='fu'>::</span><span class='fu'><a href='https://sjmgarnier.github.io/viridisLite/reference/viridis.html'>viridis</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>11</span><span class='op'>)</span>,
+  log_scale <span class='op'>=</span> <span class='cn'>F</span>,
+  cex <span class='op'>=</span> <span class='fl'>1</span>,
+  show_dendro <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="eigenMapMatMult.html">eigenMapMatMult()</a></code> </p>
-        </td>
-        <td><p>Matrix Multiplication using RcppEigen</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="eigenMatMult.html">eigenMatMult()</a></code> </p>
-        </td>
-        <td><p>Matrix Multiplication using RcppEigen</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getSpectralDecomp.html">get_spectral_decomp()</a></code> </p>
-        </td>
-        <td><p>Laplacian Spectral Decomposition</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_ddm_from_eigendec.html">get_ddm_from_eigendec()</a></code> </p>
-        </td>
-        <td><p>Distance Matrix from Laplacian spectral decomposition</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_diffusion_probability_matrix.html">get_diffusion_probability_matrix()</a></code> <code><a href="get_diffusion_probability_matrix.html">getDiffusionProbabilityMatrix()</a></code> <code><a href="get_diffusion_probability_matrix.html">get_diffu_Pt()</a></code> </p>
-        </td>
-        <td><p>Diffusion Probability Matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_diffusion_probability_matrix_from_T.html">get_diffusion_probability_matrix_from_T()</a></code> <code><a href="get_diffusion_probability_matrix_from_T.html">get_diffu_Pt_from_T()</a></code> <code><a href="get_diffusion_probability_matrix_from_T.html">get_diffu_Pt_from_Pi()</a></code> <code><a href="get_diffusion_probability_matrix_from_T.html">get_diffusion_probability_matrix_from_Pi()</a></code> </p>
-        </td>
-        <td><p>Diffusion probability matrix from transition matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_distance_matrix.html">get_distance_matrix()</a></code> <code><a href="get_distance_matrix.html">getDistanceMatrix()</a></code> <code><a href="get_distance_matrix.html">get_DDM()</a></code> </p>
-        </td>
-        <td><p>Diffusion Distance Matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_distance_matrix_from_T.html">get_distance_matrix_from_T()</a></code> <code><a href="get_distance_matrix_from_T.html">get_DDM_from_T()</a></code> <code><a href="get_distance_matrix_from_T.html">get_distance_matrix_from_Pi()</a></code> <code><a href="get_distance_matrix_from_T.html">get_DDM_from_Pi()</a></code> </p>
-        </td>
-        <td><p>Diffusion distance matrix from a custom transition matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_laplacian.html">get_laplacian()</a></code> <code><a href="get_laplacian.html">getLaplacianMatrix()</a></code> </p>
-        </td>
-        <td><p>Evaluate a Laplacian Matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_mean_distance_matrix.html">get_mean_distance_matrix()</a></code> <code><a href="get_mean_distance_matrix.html">getMeanDistanceMatrix()</a></code> </p>
-        </td>
-        <td><p>Mean distance matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plotHeatmap.html">plotHeatmap()</a></code> </p>
-        </td>
-        <td><p>Plot distance matrix as heatmap</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_distance_matrix.html">plot_distance_matrix()</a></code> </p>
-        </td>
-        <td><p>Plot distance matrix</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>DM</th>
+      <td><p>a distance matrix</p></td>
+    </tr>
+    <tr>
+      <th>col_palette</th>
+      <td><p>a colour palette, previously it was set to the `spectral`
+palette of [RColorBrewer::brewer.pal] but now it is, by default, to the
+color-blind firendly [viridis::viridis].</p></td>
+    </tr>
+    <tr>
+      <th>log_scale</th>
+      <td><p>logical. Default FALSE</p></td>
+    </tr>
+    <tr>
+      <th>cex</th>
+      <td><p>numerical value by which text should be magnified (default font
+size in [ggplot2:theme] is 11)</p></td>
+    </tr>
+    <tr>
+      <th>show_dendro</th>
+      <td><p>If the dendrogram resulting from [stats::hclust] should
+be shown. Default TRUE</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>Title of the plot passed to [ggplot]. No title by
+default</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>plot [ggplot]</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

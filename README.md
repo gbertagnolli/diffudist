@@ -42,7 +42,7 @@ igraph_options(
 
 ``` r
 N <- 100
-g <- sample_pa(n = N, power = 1, m = 2, directed = FALSE)
+g <- sample_pa(N, directed = FALSE)
 deg_g <- degree(g)
 vertex_labels <- 1:N
 vertex_labels[which(deg_g < quantile(deg_g, .75))] <- NA
@@ -53,8 +53,6 @@ plot(g, vertex.label = vertex_labels, vertex.size = 6 + 10 * (deg_g - min(deg_g)
 
 ``` r
 D <- get_DDM(g, tau = 2, type = "Normalized Laplacian", verbose = FALSE)
-#> Unweighted network.
-#> Evaluating the Normalized Laplacian matrix
 MERW_Pt <- get_diffu_Pt(g, tau = 2, type = "MERW")
 #> Unweighted network.
 #> Evaluating the MERW Normalized Laplacian matrix
@@ -130,31 +128,22 @@ if (requireNamespace("tidyverse", quietly = TRUE)) {
 }
 ```
 
+##### Plot with hierarchical clustering
+
+And finally plot the distance matrices (requires `ggplot2` and
+`ggdengro`)
+
 ``` r
-plot_ddm(D)
+plot_distance_matrix(D)
 ```
 
 ![](man/figures/plot_CRW-1.png)<!-- -->
 
 ``` r
-plot_ddm(D_MERW)
+plot_distance_matrix(D_MERW)
 ```
 
 ![](man/figures/plot_MERW-1.png)<!-- -->
-
-##### Plot with hierarchical clustering
-
-``` r
-gplots::heatmap.2(D, distfun = as.dist)
-```
-
-![](man/figures/unnamed-chunk-7-1.png)<!-- -->
-
-``` r
-gplots::heatmap.2(D_MERW, distfun = as.dist)
-```
-
-![](man/figures/unnamed-chunk-7-2.png)<!-- -->
 
 ## References
 

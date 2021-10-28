@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # diffudist <img src="man/figures/diffudist.png" align="right" alt="" width="150"/>
 
 <!-- badges: start -->
-  [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
   [![R-CMD-check](https://github.com/gbertagnolli/diffudist/workflows/R-CMD-check/badge.svg)](https://github.com/gbertagnolli/diffudist/actions)
 <!-- badges: end -->
 
@@ -51,7 +51,7 @@ igraph_options(
 
 ```{r plot-g, fig.width=6, fig.height=6}
 N <- 100
-g <- sample_pa(n = N, power = 1, m = 2, directed = FALSE)
+g <- sample_pa(N, directed = FALSE)
 deg_g <- degree(g)
 vertex_labels <- 1:N
 vertex_labels[which(deg_g < quantile(deg_g, .75))] <- NA
@@ -90,7 +90,7 @@ if (requireNamespace("parallelDist", quietly = TRUE)) {
 
 And finally plot the distance matrices (requires `ggplt2`)
 
-```{r plot-ddm-function, fig.width=10, fig.height=9}
+```{r plot-ddm-function, fig.width=10, fig.height=9, warning = FALSE}
 if (requireNamespace("tidyverse", quietly = TRUE)) {
   library(tidyverse)
   plot_ddm <- function(ddm, clustering = FALSE) {
@@ -123,23 +123,20 @@ if (requireNamespace("tidyverse", quietly = TRUE)) {
     gplots::heatmap.2(D, distfun = as.dist)
   }
 }
-```
-
-```{r plot_CRW, fig.width=7, fig.height=6}
 plot_ddm(D)
-```
-
-```{r plot_MERW, fig.width=7, fig.height=6}
-plot_ddm(D_MERW)
 ```
 
 ##### Plot with hierarchical clustering 
 
-```{r, fig.width=7, fig.height=7}
-gplots::heatmap.2(D, distfun = as.dist)
-gplots::heatmap.2(D_MERW, distfun = as.dist)
+And finally plot the distance matrices (requires `ggplot2` and `ggdengro`)
+
+```{r plot_CRW, fig.width=11, fig.height=7}
+plot_distance_matrix(D)
 ```
 
+```{r plot_MERW, fig.width=11, fig.height=7}
+plot_distance_matrix(D_MERW)
+```
 
 ## References
 

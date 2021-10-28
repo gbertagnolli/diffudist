@@ -98,7 +98,7 @@
 <a href="#examples" class="anchor"></a>Examples</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">100</span>
-<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/sample_pa.html">sample_pa</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">N</span>, power <span class="op">=</span> <span class="fl">1</span>, m <span class="op">=</span> <span class="fl">2</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="va">N</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">deg_g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
 <span class="va">vertex_labels</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="va">N</span>
 <span class="va">vertex_labels</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">deg_g</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">deg_g</span>, <span class="fl">.75</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
@@ -106,8 +106,6 @@
 <p><img src="reference/figures/plot-g-1.png"><!-- --></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_distance_matrix.html">get_DDM</a></span><span class="op">(</span><span class="va">g</span>, tau <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"Normalized Laplacian"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; Unweighted network.</span>
-<span class="co">#&gt; Evaluating the Normalized Laplacian matrix</span>
 <span class="va">MERW_Pt</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_diffusion_probability_matrix.html">get_diffu_Pt</a></span><span class="op">(</span><span class="va">g</span>, tau <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"MERW"</span><span class="op">)</span>
 <span class="co">#&gt; Unweighted network.</span>
 <span class="co">#&gt; Evaluating the MERW Normalized Laplacian matrix</span></code></pre></div>
@@ -163,21 +161,16 @@
     <span class="fu">gplots</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="va">D</span>, distfun <span class="op">=</span> <span class="va">as.dist</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">plot_ddm</span><span class="op">(</span><span class="va">D</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/plot_CRW-1.png"><!-- --></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">plot_ddm</span><span class="op">(</span><span class="va">D_MERW</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/plot_MERW-1.png"><!-- --></p>
 <div id="plot-with-hierarchical-clustering" class="section level5">
 <h5 class="hasAnchor">
 <a href="#plot-with-hierarchical-clustering" class="anchor"></a>Plot with hierarchical clustering</h5>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">gplots</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="va">D</span>, distfun <span class="op">=</span> <span class="va">as.dist</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-7-1.png"><!-- --></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">gplots</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="va">D_MERW</span>, distfun <span class="op">=</span> <span class="va">as.dist</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-7-2.png"><!-- --></p>
+<p>And finally plot the distance matrices (requires <code>ggplot2</code> and <code>ggdengro</code>)</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/plot_distance_matrix.html">plot_distance_matrix</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/plot_CRW-1.png"><!-- --></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/plot_distance_matrix.html">plot_distance_matrix</a></span><span class="op">(</span><span class="va">D_MERW</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/plot_MERW-1.png"><!-- --></p>
 </div>
 </div>
 </div>

@@ -7,7 +7,7 @@
 get_spectral_decomp(g, type = "Normalized Laplacian", verbose = F)
 }
 \arguments{
-\item{g}{the network}
+\item{g}{the network in the [igraph] format}
 
 \item{type}{c("Laplacian", "Normalized Laplacian", "Quantum Laplacian"), default "Normalized Laplacian".}
 
@@ -16,9 +16,9 @@ get_spectral_decomp(g, type = "Normalized Laplacian", verbose = F)
 \value{
 lambdas the eigenvalues of the Laplacian
 
-u_L the matrix of left eigenvectors (rows)
+`u_L` the matrix of left eigenvectors (rows)
 
-u_R the matrix of right eigenvectors (columns)
+`u_R` the matrix of right eigenvectors (columns)
 }
 \description{
 Returns the eigenvalue spectrum together with eigenvectors of a Laplacian

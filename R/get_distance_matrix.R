@@ -63,7 +63,7 @@ get_distance_matrix <- function(g, tau, type = "Normalized Laplacian", weights =
   #   igraph::E(g)$weight <- 1
   # }
   # N <- length(igraph::V(g))
-  expL <- get_diffusion_probability_matrix(g, tau, type, weights)
+  expL <- get_diffusion_probability_matrix(g, tau, type, weights, verbose)
   if (verbose) {
     cat(paste("Building distance matrix...\n"))
   }

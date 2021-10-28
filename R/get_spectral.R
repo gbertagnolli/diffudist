@@ -3,12 +3,12 @@
 #' @description
 #' Returns the eigenvalue spectrum together with eigenvectors of a Laplacian
 #' corresponding to a network.
-#' @param g the network
+#' @param g the network in the [igraph] format
 #' @param type c("Laplacian", "Normalized Laplacian", "Quantum Laplacian"), default "Normalized Laplacian".
 #' @param verbose whether warnings have to be printed or not
 #' @return lambdas the eigenvalues of the Laplacian
-#' @return u_L the matrix of left eigenvectors (rows)
-#' @return u_R the matrix of right eigenvectors (columns)
+#' @return `u_L` the matrix of left eigenvectors (rows)
+#' @return `u_R` the matrix of right eigenvectors (columns)
 #' @references Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
 #'   interdependent systems. Physical Review E, 103(4), 042301.
 #'   \href{https://doi.org/10.1103/PhysRevE.103.042301}{doi: 10.1103/PhysRevE.103.042301}
