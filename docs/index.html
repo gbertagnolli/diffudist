@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diffusion distance for complex networks • diffudist</title>
+<title>Diffusion Distance for Complex Networks • diffudist</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Diffusion distance for complex networks">
+<script src="pkgdown.js"></script><meta property="og:title" content="Diffusion Distance for Complex Networks">
 <meta property="og:description" content="Computing the diffusion distance for complex single-layer networks.
     Given a network one can obtain different types of Laplacian (or transition)
     matrices corresponding to different continuous-time random walks dynamics, i.e., 
@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">diffudist</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -51,7 +51,14 @@
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/gbertagnolli/diffudist/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -87,8 +94,16 @@
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>Additionally to <code>diffudist</code> you will also need the <code>igraph</code> package, because the main arguments of the functions in <code>diffudist</code> are networks as <code>igraph</code> objects.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">diffudist</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gbertagnolli.github.io/diffudist">diffudist</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'igraph'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     decompose, spectrum</span>
+<span class="co">#&gt; The following object is masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     union</span>
 <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/igraph_options.html">igraph_options</a></span><span class="op">(</span>
   vertex.frame.color <span class="op">=</span> <span class="st">"white"</span>,
   vertex.color <span class="op">=</span> <span class="st">"#00B4A6"</span>,
@@ -160,7 +175,22 @@
   <span class="va">plot_ddm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">ddm</span>, <span class="va">clustering</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span>
     <span class="fu">gplots</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gplots/man/heatmap.2.html">heatmap.2</a></span><span class="op">(</span><span class="va">D</span>, distfun <span class="op">=</span> <span class="va">as.dist</span><span class="op">)</span>
   <span class="op">}</span>
-<span class="op">}</span></code></pre></div>
+<span class="op">}</span>
+<span class="co">#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</span>
+<span class="co">#&gt; ✓ ggplot2 3.3.5     ✓ purrr   0.3.4</span>
+<span class="co">#&gt; ✓ tibble  3.1.5     ✓ dplyr   1.0.7</span>
+<span class="co">#&gt; ✓ tidyr   1.1.4     ✓ stringr 1.4.0</span>
+<span class="co">#&gt; ✓ readr   2.0.2     ✓ forcats 0.5.1</span>
+<span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span>
+<span class="co">#&gt; x dplyr::as_data_frame() masks tibble::as_data_frame(), igraph::as_data_frame()</span>
+<span class="co">#&gt; x purrr::compose()       masks igraph::compose()</span>
+<span class="co">#&gt; x tidyr::crossing()      masks igraph::crossing()</span>
+<span class="co">#&gt; x dplyr::filter()        masks stats::filter()</span>
+<span class="co">#&gt; x dplyr::groups()        masks igraph::groups()</span>
+<span class="co">#&gt; x dplyr::lag()           masks stats::lag()</span>
+<span class="co">#&gt; x purrr::simplify()      masks igraph::simplify()</span>
+<span class="fu">plot_ddm</span><span class="op">(</span><span class="va">D</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/plot-ddm-function-1.png"><!-- --></p>
 <div id="plot-with-hierarchical-clustering" class="section level5">
 <h5 class="hasAnchor">
 <a href="#plot-with-hierarchical-clustering" class="anchor"></a>Plot with hierarchical clustering</h5>
@@ -187,7 +217,16 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/gbertagnolli/diffudist/">https://​github.com/​gbertagnolli/​diffudist/​</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/gbertagnolli/diffudist/issues">https://​github.com/​gbertagnolli/​diffudist/​issues</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li>GPL (&gt;=2)</li>

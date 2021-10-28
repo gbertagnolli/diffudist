@@ -1,5 +1,5 @@
 Package: diffudist
-Title: Diffusion distance for complex networks
+Title: Diffusion Distance for Complex Networks
 Version: 1.0.0
 Authors@R: c(
     person(given = "Giulia",
@@ -22,7 +22,6 @@ Description: Computing the diffusion distance for complex single-layer networks.
     Laplacians, stochastic matrices, and the corresponding diffusion distance matrices.
 Depends: R (>= 3.5.0)
 Imports:
-    compiler,
     expm,
     ggdendro,
     ggplot2,

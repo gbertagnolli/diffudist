@@ -11,7 +11,7 @@
 #' @return `u_R` the matrix of right eigenvectors (columns)
 #' @references Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
 #'   interdependent systems. Physical Review E, 103(4), 042301.
-#'   \href{https://doi.org/10.1103/PhysRevE.103.042301}{doi: 10.1103/PhysRevE.103.042301}
+#'   \doi{10.1103/PhysRevE.103.042301}
 #'   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
 #' @rdname getSpectralDecomp
 #' @export
@@ -71,7 +71,7 @@ get_spectral_decomp <- function(g, type = "Normalized Laplacian", verbose = F) {
 #' @param verbose whether warnings have to be printed or not
 #' @references Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
 #'   interdependent systems. Physical Review E, 103(4), 042301.
-#'   \href{https://doi.org/10.1103/PhysRevE.103.042301}{doi: 10.1103/PhysRevE.103.042301}
+#'   \doi{10.1103/PhysRevE.103.042301}
 #'   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
 #' @export
 get_ddm_from_eigendec <- function(tau, Q, Q_inv, lambdas,

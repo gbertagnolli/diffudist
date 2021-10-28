@@ -32,6 +32,14 @@ as `igraph` objects.
 ``` r
 library(diffudist)
 library(igraph)
+#> 
+#> Attaching package: 'igraph'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     decompose, spectrum
+#> The following object is masked from 'package:base':
+#> 
+#>     union
 igraph_options(
   vertex.frame.color = "white",
   vertex.color = "#00B4A6",
@@ -126,7 +134,23 @@ if (requireNamespace("tidyverse", quietly = TRUE)) {
     gplots::heatmap.2(D, distfun = as.dist)
   }
 }
+#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+#> ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+#> ✓ tibble  3.1.5     ✓ dplyr   1.0.7
+#> ✓ tidyr   1.1.4     ✓ stringr 1.4.0
+#> ✓ readr   2.0.2     ✓ forcats 0.5.1
+#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#> x dplyr::as_data_frame() masks tibble::as_data_frame(), igraph::as_data_frame()
+#> x purrr::compose()       masks igraph::compose()
+#> x tidyr::crossing()      masks igraph::crossing()
+#> x dplyr::filter()        masks stats::filter()
+#> x dplyr::groups()        masks igraph::groups()
+#> x dplyr::lag()           masks stats::lag()
+#> x purrr::simplify()      masks igraph::simplify()
+plot_ddm(D)
 ```
+
+![](man/figures/plot-ddm-function-1.png)<!-- -->
 
 ##### Plot with hierarchical clustering
 

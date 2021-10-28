@@ -10,7 +10,7 @@
 #' @references
 #' De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of
 #' Functional Clusters in Collective Phenomena. Physical Review Letters.
-#' \href{https://doi.org/10.1103/PhysRevLett.118.168301}{doi 10.1103/PhysRevLett.118.168301}
+#' \doi{10.1103/PhysRevLett.118.168301}
 #'
 #' Bertagnolli, G., & De Domenico, M. (2020). Diffusion Geometry of Multiplex
 #' and Interdependent Systems.
