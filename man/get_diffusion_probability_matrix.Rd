@@ -14,7 +14,8 @@ get_diffusion_probability_matrix(
   verbose = TRUE
 )
 
-getDiffusionProbabilityMatrix(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE)
+getDiffusionProbabilityMatrix(g, tau, type = "Normalized Laplacian", weights = NULL,
+                                     verbose = TRUE)
 
 get_diffu_Pt(
   g,

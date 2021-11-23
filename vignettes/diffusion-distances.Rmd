@@ -90,20 +90,29 @@ Finally, `as_dist` gives the possibility to control the class of the returned ob
 ## The classical random walk and its induced diffusion distances
 
 To illustrate the usage of the package `diffudist` let us start with a small well-known network: Zachary's karate club network [@Zachary1977]. 
-First of all, we need to load the following packages: `igraph` for manipulating networks, our `diffudist` and `igraphdata` a data package containing different networks in the `igraph` format, among which the one we are interested in, `karate`.
+After loading the packages `igraph`, for manipulating networks, and our `diffudist`, we download the weighted adjacency matrix of the karate club network^[The `karate` network is also available as an unweighted network in `igraph` [@Rigraph] `make_graph("Zachary")` and as a weighted network in the data package `igraphdata` [@igraphdata].] and build the network `karate`:
 
 ```{r load-pkgs, echo = TRUE, message = FALSE, warning = FALSE}
 library(igraph)
-library(igraphdata)
 library(diffudist)
 igraph_options(vertex.frame.color = "white", vertex.color = "#00B4A6")
+# dataset
+df <- read.delim(url("http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/zachary.dat"), 
+                 skip = 41, sep = " ", header = FALSE)
+A <- as.matrix(df[, -1])
+colnames(A) <- rownames(A) <- c("H", 2:33, "A")
+karate <- graph_from_adjacency_matrix(A, mode = "undirected", weighted = TRUE)
+V(karate)$Faction <- 1
+V(karate)$Faction[c(9, 10, 15, 16, 19, 21, 23:34)] <- 2
+V(karate)$color <- c("#66c2a5", "#fc8d62")[V(karate)$Faction]
 ```
+
+Plot the network:
 
 ```{r karate-plot, echo = TRUE}
 #| fig.cap = "**Figure 1** Zachary's karate club network. The node colour represents the 'faction' the corresponding Actor belongs to after the club splits. Nodes labelled as 'A' and 'H' correspond respectively to John A., the club administrator, and Mr. Hi, the instructor.",
 #| fig.width = 8
-data(karate)
-plot(karate)
+plot(karate, edge.width = E(karate)$weight)
 ```
 
 
@@ -154,7 +163,7 @@ Also, if we look at the distance matrices in Fig.4 we find a persistent organisa
 Finally note that, overall, the pairwise distances become smaller as $\tau$ increases^[The karate club network is connected and non-bipartite, hence the random walk on it is ergodic and the process converges to the invariant/stationary distribution [@Chung1997].], nevertheless the intra-community distances shrink faster than the inter-communities distances, as found in [@DeDomenico2017].
 
 ```{r}
-#| w-ddms-plots, fig.width = 8, fig.height = 5,
+#| w-ddms-plots, fig.width = 7.5, fig.height = 5,
 #| fig.subcap = c("", "", "", ""),
 #| fig.cap = "**Figure 4** Diffusion distances of the weighted karate club network. As in Fig.2, but accounting also for interactions strenghts (i.e. edge weights). Observe that in this case there are no misclassifications and the (main) two-module partition is stable over time.",
 #| fig.ncol = 2, out.width = "47%", fig.align = "center",
@@ -227,7 +236,7 @@ ddm_prrw <- get_distance_matrix_from_T(Pi = T_prrw, tau = 2, verbose = FALSE)
 Observe that in this example we are giving the random walker the possibility to teleport to itself. If you want to exclude this possibility, instead of having $\alpha \frac1N \mathbf{1}^T \mathbf{1}$ chose $\frac{1}{N-1} (\mathbf{1}^T \mathbf{1} - \mathbf{I})$.
 
 ```{r}
-#| prrw-ddm-plot, fig.width = 9, fig.height = 5,
+#| prrw-ddm-plot, fig.width = 7.5, fig.height = 5,
 #| fig.cap="Distance matrix of the karate club network at $\\tau=2$ for the PRRW.",
 #| fig.pos = "!ht"
 plot_distance_matrix(ddm_prrw, cex = 1.2)
