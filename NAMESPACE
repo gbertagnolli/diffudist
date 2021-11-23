@@ -2,6 +2,7 @@
 
 export(eigenMapMatMult)
 export(eigenMatMult)
+export(getDiffusionProbabilityMatrix)
 export(getDistanceMatrix)
 export(getMeanDistanceMatrix)
 export(get_DDM)

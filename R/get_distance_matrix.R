@@ -35,6 +35,9 @@
 #'    if weights is NULL (the default) and g has an edge attribute called weight, then
 #'    it will be used automatically.
 #'    If this is NA then no weights are used (even if the graph has a weight attribute).
+#' @param as_dist If the function should return a matrix or an object of class "dist" as
+#'   returned from [stats::as.dist]. Default is FALSE if the number of nodes is smaller
+#'   than 1000.
 #' @param verbose default TRUE
 #' @return The diffusion distance matrix \eqn{D_t}, i.e. the Euclidean
 #' (\eqn{L^2}) norm between the rows of \eqn{exp^{-\tau L}}, where \eqn{-L}
@@ -56,7 +59,7 @@
 #' dm_merw <- get_distance_matrix(g, tau = 1, type = "MERW")
 #' @export
 get_distance_matrix <- function(g, tau, type = "Normalized Laplacian", weights = NULL,
-                                verbose = TRUE) {
+                                as_dist = FALSE, verbose = TRUE) {
   # #by default weights are considered, if present
   # if ( is.null(igraph::E(g)$weight) ) {
   #   cat("Warning: missing edge weights. Assigning 1 by default\n")
@@ -64,6 +67,15 @@ get_distance_matrix <- function(g, tau, type = "Normalized Laplacian", weights =
   # }
   # N <- length(igraph::V(g))
   expL <- get_diffusion_probability_matrix(g, tau, type, weights, verbose)
+  # names
+  node_labels <- as.character(igraph::V(g)$name)
+  if (is.null(node_labels)) {
+    node_labels <- as.character(igraph::V(g)$label)
+  }
+  if (is.null(node_labels)) {
+    node_labels <- as.character(igraph::V(g))    # same as node_labels <- 1:N
+  }
+  colnames(expL) <- rownames(expL) <- node_labels
   if (verbose) {
     cat(paste("Building distance matrix...\n"))
   }
@@ -80,18 +92,11 @@ get_distance_matrix <- function(g, tau, type = "Normalized Laplacian", weights =
     # \sqrt(\sum_i (x_i - y_i) ^ 2))
     DM <- stats::dist(expL)
   }
-  DM <- as.matrix(DM)
-  # names
-  node_labels <- as.character(igraph::V(g)$name)
-  if (is.null(node_labels)) {
-    node_labels <- as.character(igraph::V(g)$label)
+  if ((!as_dist) && (length(igraph::V(g)) < 1000)) {
+    return(as.matrix(DM))
+  } else {
+    return(DM)
   }
-  if (is.null(node_labels)) {
-    node_labels <- as.character(igraph::V(g))    # same as node_labels <- 1:N
-  }
-  colnames(DM) <- node_labels
-  rownames(DM) <- colnames(DM)
-  return(DM)
 }
 
 # get_distance_matrix <- compiler::cmpfun(getDistanceMatrixRaw)
@@ -101,7 +106,7 @@ get_distance_matrix <- function(g, tau, type = "Normalized Laplacian", weights =
 #' @export
 getDistanceMatrix <- function(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE) {
   .Deprecated("get_distance_matrix")
-  return(get_distance_matrix(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE))
+  return(get_distance_matrix(g, tau, type = type, weights = weights, verbose = verbose))
 }
 
 #' @rdname get_distance_matrix

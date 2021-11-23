@@ -27,6 +27,6 @@ corresponding to a network.
 \references{
 Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
   interdependent systems. Physical Review E, 103(4), 042301.
-  \href{https://doi.org/10.1103/PhysRevE.103.042301}{doi: 10.1103/PhysRevE.103.042301}
+  \doi{10.1103/PhysRevE.103.042301}
   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
 }

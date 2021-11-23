@@ -11,12 +11,20 @@ get_distance_matrix(
   tau,
   type = "Normalized Laplacian",
   weights = NULL,
+  as_dist = FALSE,
   verbose = TRUE
 )
 
 getDistanceMatrix(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE)
 
-get_DDM(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE)
+get_DDM(
+  g,
+  tau,
+  type = "Normalized Laplacian",
+  weights = NULL,
+  as_dist = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{g}{a (single-layer) network}
@@ -45,6 +53,10 @@ respective types (case is ignored). The argument match is done through
 if weights is NULL (the default) and g has an edge attribute called weight, then
 it will be used automatically.
 If this is NA then no weights are used (even if the graph has a weight attribute).}
+
+\item{as_dist}{If the function should return a matrix or an object of class "dist" as
+returned from [stats::as.dist]. Default is FALSE if the number of nodes is smaller
+than 1000.}
 
 \item{verbose}{default TRUE}
 }
@@ -79,11 +91,11 @@ dm_merw <- get_distance_matrix(g, tau = 1, type = "MERW")
 \references{
 De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of
   Functional Clusters in Collective Phenomena. Physical Review Letters.
-  \href{https://doi.org/10.1103/PhysRevLett.118.168301}{doi: 10.1103/PhysRevLett.118.168301}
+  \doi{10.1103/PhysRevLett.118.168301}
 
   Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
   interdependent systems. Physical Review E, 103(4), 042301.
-  \href{https://doi.org/10.1103/PhysRevE.103.042301}{doi: 10.1103/PhysRevE.103.042301}
+  \doi{10.1103/PhysRevE.103.042301}
   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
 }
 \seealso{

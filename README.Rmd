@@ -7,6 +7,7 @@ output: github_document
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  warn = -1,
   comment = "#>",
   fig.path = "man/figures/"
 )
@@ -41,6 +42,7 @@ Additionally to `diffudist` you will also need the `igraph` package, because the
 ```{r}
 library(diffudist)
 library(igraph)
+library(ggplot2)
 igraph_options(
   vertex.frame.color = "white",
   vertex.color = "#00B4A6",
@@ -54,14 +56,16 @@ N <- 100
 g <- sample_pa(N, directed = FALSE)
 deg_g <- degree(g)
 vertex_labels <- 1:N
-vertex_labels[which(deg_g < quantile(deg_g, .75))] <- NA
+vertex_labels[which(deg_g < quantile(deg_g, .9))] <- NA
 plot(g, vertex.label = vertex_labels, vertex.size = 6 + 10 * (deg_g - min(deg_g)) / max(deg_g))
 ```
 
 
 ```{r}
-D <- get_DDM(g, tau = 2, type = "Normalized Laplacian", verbose = FALSE)
-MERW_Pt <- get_diffu_Pt(g, tau = 2, type = "MERW")
+D <- get_distance_matrix(g, tau = 2, type = "Normalized Laplacian", verbose = FALSE)
+# or, for short:
+# get_DDM(g, tau = 2, type = "Normalized Laplacian", verbose = FALSE)
+MERW_Pt <- get_diffusion_probability_matrix(g, tau = 2, type = "MERW")
 ```
 
 The probability transition matrix returned from `get_diffusion_probability_matrix` (or its shortened version `get_diffu_Pt`) is the matrix $e^{-\tau L_{\text{rw}}}$. The diffusion dynamics is controlled by the specific Laplacian matrix $L_{\text{rw}} = I - T_{\text{rw}}$, where $T_{\text{rw}}$ is the jump matrix of the discrete-time random walk corresponding to our continuous-time dynamics.
@@ -88,55 +92,27 @@ if (requireNamespace("parallelDist", quietly = TRUE)) {
 }
 ```
 
-And finally plot the distance matrices (requires `ggplt2`)
-
-```{r plot-ddm-function, fig.width=10, fig.height=9, warning = FALSE}
-if (requireNamespace("tidyverse", quietly = TRUE)) {
-  library(tidyverse)
-  plot_ddm <- function(ddm, clustering = FALSE) {
-    N <- nrow(ddm)
-    as_tibble(ddm) %>%
-      add_column("from" = 1:N, .before = 1) %>%
-      gather(key = to, value = value, -from, factor_key = TRUE) %>%
-      mutate(
-        "to" = as.numeric(gsub(pattern = "V", replacement = "", x = to)),
-        "value" = as.numeric(value)
-      ) %>%
-      ggplot(mapping = aes(x = to, y = from, fill = value)) +
-        geom_tile() +
-        coord_equal() +
-        labs(x = "", y = "") + 
-        scale_y_reverse(breaks = seq(N, 1, -10), expand = c(0, 0)) +
-        scale_x_continuous(position = "top", breaks = seq(1, N, 10), expand = c(0, 0)) +
-        scale_fill_distiller(palette = "Spectral", limits = c(0, ceiling(max(ddm)))) + 
-        guides(fill = guide_colourbar(barwidth = 1, barheight = 10, nbin = 100)) +
-        theme_minimal() +
-        theme(
-          panel.grid.minor = element_blank(), 
-          panel.grid.major = element_blank(), 
-          axis.text.x = element_blank(),
-          axis.text.y = element_blank()) -> pl
-      return(pl)
-  }
-} else {
-  plot_ddm <- function(ddm, clustering = TRUE) {
-    gplots::heatmap.2(D, distfun = as.dist)
-  }
-}
-plot_ddm(D)
-```
-
-##### Plot with hierarchical clustering 
+#### Plot distance matrix
 
 And finally plot the distance matrices (requires `ggplot2` and `ggdengro`)
 
-```{r plot_CRW, fig.width=11, fig.height=7}
-plot_distance_matrix(D)
+```{r plot_CRW, fig.width=11, fig.height=7, warning=FALSE}
+plot_distance_matrix(D, show_dendro = FALSE) +
+  scale_y_discrete(breaks = vertex_labels[!is.na(vertex_labels)])
 ```
 
 ```{r plot_MERW, fig.width=11, fig.height=7}
+plot_distance_matrix(D_MERW, show_dendro = FALSE) +
+  scale_y_discrete(breaks = vertex_labels[!is.na(vertex_labels)])
+```
+
+Adding the hierarchical clustering, i.e., visualising a dendrogram.
+
+```{r plots-with-dendro, fig.width=11, fig.height=7, warning=FALSE}
+plot_distance_matrix(D)
 plot_distance_matrix(D_MERW)
 ```
+
 
 ## References
 

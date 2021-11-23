@@ -10,7 +10,7 @@ plot_distance_matrix(
   log_scale = F,
   cex = 1,
   show_dendro = TRUE,
-  title = NULL
+  title = ""
 )
 }
 \arguments{
@@ -28,8 +28,7 @@ size in [ggplot2:theme] is 11)}
 \item{show_dendro}{If the dendrogram resulting from [stats::hclust] should
 be shown. Default TRUE}
 
-\item{title}{Title of the plot passed to [ggplot]. No title by
-default}
+\item{title}{Title of the plot passed to [ggplot]. No title by default.}
 }
 \value{
 plot [ggplot]

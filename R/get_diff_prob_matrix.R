@@ -229,8 +229,15 @@ get_diffusion_probability_matrix <- function(g, tau, type = "Normalized Laplacia
   return(Pt)
 }
 
-#' @rdname get_diffusion_probability_matrix
-getDiffusionProbabilityMatrix <- get_diffusion_probability_matrix
+#' @describeIn get_diffusion_probability_matrix Old deprecated function
+#' @usage getDiffusionProbabilityMatrix(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE)
+#' @export
+getDiffusionProbabilityMatrix <- function(g, tau, type = "Normalized Laplacian",
+                                          weights = NULL, verbose = TRUE) {
+  .Deprecated("get_diffusion_probability_matrix")
+  return(get_diffusion_probability_matrix(g, tau, type = type,
+                                          weights = NULL, verbose = TRUE))
+}
 
 #' @rdname get_diffusion_probability_matrix
 #' @export

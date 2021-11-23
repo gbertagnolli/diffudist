@@ -16,8 +16,7 @@
 #'   size in [ggplot2:theme] is 11)
 #' @param show_dendro If the dendrogram resulting from [stats::hclust] should
 #'   be shown. Default TRUE
-#' @param title Title of the plot passed to [ggplot]. No title by
-#'   default
+#' @param title Title of the plot passed to [ggplot]. No title by default.
 #' @importFrom ggplot2 ggplot aes element_text element_blank element_line unit theme labs guide_colourbar
 #' @importFrom rlang .data
 #' @return plot [ggplot]
@@ -25,7 +24,7 @@
 #' @export
 plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
                         log_scale = F, cex = 1, show_dendro = TRUE,
-                        title = NULL) {
+                        title = "") {
 
   # This assumes that the input is a matrix
   if (is.matrix(DM)) {
@@ -71,10 +70,10 @@ plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
   # ---
   # Building plot(s)
   default_theme <- ggplot2::theme_get()
-  ggplot2::theme_update(
-    axis.text = ggplot2::element_text(size = default_theme$axis.text$size * cex),
-    legend.text = ggplot2::element_text(size = default_theme$legend.text$size * cex)
-    )
+  # ggplot2::theme_update(
+  #   axis.text = ggplot2::element_text(size = default_theme$axis.text$size * cex),
+  #   legend.text = ggplot2::element_text(size = default_theme$legend.text$size * cex)
+  #   )
   ## Create plot components
   ### Heatmap
   if (!log_scale) {
@@ -92,7 +91,11 @@ plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         axis.ticks.y = element_line(),
-        axis.ticks.length = unit(10, "pt")
+        axis.ticks.length = unit(10, "pt"),
+        axis.text = element_text(size = default_theme$axis.text$size * cex),
+        legend.text = element_text(size = default_theme$legend.text$size * cex),
+        legend.title = element_text(size = default_theme$legend.text$size * cex),
+        plot.title = element_text(size = default_theme$plot.title$size * cex),
         )
   } else {
     p1 <- ggplot(mdf, aes(x = .data$to, y = .data$from)) +
@@ -106,13 +109,14 @@ plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
       theme(
         panel.background = element_blank(),
         legend.position = "right",
-        axis.text = ggplot2::element_text(size = max(cex, 12)),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         axis.ticks.y = element_line(),
         axis.ticks.length = unit(10, "pt"),
-        legend.text = ggplot2::element_text(size = max(cex, 18)),
-        legend.title = ggplot2::element_text(size = max(cex, 18))
+        axis.text = element_text(size = default_theme$axis.text$size * cex),
+        legend.text = element_text(size = default_theme$legend.text$size * cex),
+        legend.title = element_text(size = default_theme$legend.text$size * (cex + 0.3)),
+        plot.title = element_text(size = default_theme$plot.title$size * cex),
       )
   }
 

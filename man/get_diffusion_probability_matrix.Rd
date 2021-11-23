@@ -14,13 +14,7 @@ get_diffusion_probability_matrix(
   verbose = TRUE
 )
 
-getDiffusionProbabilityMatrix(
-  g,
-  tau,
-  type = "Normalized Laplacian",
-  weights = NULL,
-  verbose = TRUE
-)
+getDiffusionProbabilityMatrix(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE)
 
 get_diffu_Pt(
   g,
@@ -67,14 +61,19 @@ The matrix \eqn{exp^{-\tau L}}, exponential of a Laplacian matrix.
 \description{
 Returns a matrix where each entry encodes the diffusion probability between two nodes
 }
+\section{Functions}{
+\itemize{
+\item \code{getDiffusionProbabilityMatrix}: Old deprecated function
+}}
+
 \references{
 De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of
   Functional Clusters in Collective Phenomena. Physical Review Letters.
-  \href{https://doi.org/10.1103/PhysRevLett.118.168301}{doi: 10.1103/PhysRevLett.118.168301}
+  \doi{10.1103/PhysRevLett.118.168301}
 
   Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
   interdependent systems. Physical Review E, 103(4), 042301.
-  \href{https://doi.org/10.1103/PhysRevE.103.042301}{doi: 10.1103/PhysRevE.103.042301}
+  \doi{10.1103/PhysRevE.103.042301}
   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
 }
 \seealso{

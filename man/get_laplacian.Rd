@@ -60,5 +60,5 @@ with the abbreviation \code{T} for the logical \code{TRUE}.
 }
 \references{
 [1] Burda, Z., et al. (2009). Phys Rev. Lett. 102 160602(April), 1–4.
-   \href{https://doi.org/10.1103/PhysRevLett.102.160602}{doi: 10.1103/PhysRevLett.102.160602}
+   \doi{10.1103/PhysRevLett.102.160602}
 }

@@ -15,11 +15,14 @@ Authors@R: c(
            )
 URL: https://gbertagnolli.github.io/diffudist
 BugReports: https://github.com/gbertagnolli/diffudist/issues
-Description: Computing the diffusion distance for complex single-layer networks.
+Description: Enables the evaluation of diffusion distances for complex single-layer networks.
     Given a network one can obtain different types of Laplacian (or transition)
-    matrices corresponding to different continuous-time random walks dynamics, i.e., 
-    continuous-time Markov chians on the vertex set. This package enables the evaluation of 
-    Laplacians, stochastic matrices, and the corresponding diffusion distance matrices.
+    matrices corresponding to different continuous-time random walks dynamics on the network. 
+    This package enables the evaluation of Laplacians, stochastic matrices, and the 
+    corresponding diffusion distance matrices. The metric structure induced by the nework-driven
+    process is richer and more robust than the one given by shortest-paths and allows to study 
+    the geometry induced by different types of diffusion-like communication mechanisms taking 
+    place on complex networks.
 Depends: R (>= 3.5.0)
 Imports:
     expm,
@@ -34,10 +37,12 @@ Imports:
     reshape2,
     rlang
 Suggests:
+    knitr,
     cowplot,
     parallelDist,
     strex,
-    tidyr
+    tidyr,
+    rmarkdown
 License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
@@ -45,3 +50,4 @@ RoxygenNote: 7.1.2
 LinkingTo: 
     RcppEigen,
     Rcpp
+VignetteBuilder: knitr

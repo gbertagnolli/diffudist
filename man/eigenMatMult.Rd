@@ -15,5 +15,5 @@ eigenMatMult(A, B)
 C matrix of dimension \eqn{m \times p} of the row-column product of A and B and C
 }
 \description{
-Matrix multiplication of three matrices in input.
+Matrix multiplication of the two matrices in input.
 }
