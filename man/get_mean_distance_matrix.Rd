@@ -31,7 +31,7 @@ Functional Clusters in Collective Phenomena. Physical Review Letters.
 
 Bertagnolli, G., & De Domenico, M. (2020). Diffusion Geometry of Multiplex
 and Interdependent Systems.
-\href{http://arxiv.org/abs/2006.13032}{arxiv preprint arxiv:2006.13032}
+\href{https://arxiv.org/abs/2006.13032}{arxiv preprint arxiv:2006.13032}
 }
 \seealso{
 \code{\link{get_diffusion_probability_matrix}}, \code{\link{get_distance_matrix}}

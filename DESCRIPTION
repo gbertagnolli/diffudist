@@ -13,13 +13,13 @@ Authors@R: c(
            email = "manlio.dedomenico@gmail.com", 
            comment = c(ORCID = "0000-0001-5158-8594"))
            )
-URL: https://gbertagnolli.github.io/diffudist
-BugReports: https://github.com/gbertagnolli/diffudist/issues
+URL: https://gbertagnolli.github.io/diffudist/
+BugReports: https://github.com/gbertagnolli/diffudist/issues/
 Description: Enables the evaluation of diffusion distances for complex single-layer networks.
     Given a network one can obtain different types of Laplacian (or transition)
     matrices corresponding to different continuous-time random walks dynamics on the network. 
     This package enables the evaluation of Laplacians, stochastic matrices, and the 
-    corresponding diffusion distance matrices. The metric structure induced by the nework-driven
+    corresponding diffusion distance matrices. The metric structure induced by the network-driven
     process is richer and more robust than the one given by shortest-paths and allows to study 
     the geometry induced by different types of diffusion-like communication mechanisms taking 
     place on complex networks.

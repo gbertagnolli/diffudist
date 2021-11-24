@@ -254,8 +254,7 @@ get_diffu_Pt <- get_diffusion_probability_matrix
 #' @return \eqn{exp^{-\tau (I - \Pi)}}, exponential of the normalized Laplacian
 #' matrix corresponding to the given transition rate matrix (or transition
 #' probability matrix of a discrete-time Markov chain).
-#' @keywords stochastic matrix, transition probability matrix,
-#' continuous-time Markov chain
+#' @keywords Markov-chain probabilities transition
 #' @seealso \code{\link{get_diffusion_probability_matrix}}
 #' @references
 #' De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of
@@ -264,7 +263,7 @@ get_diffu_Pt <- get_diffusion_probability_matrix
 #'
 #' Bertagnolli, G., & De Domenico, M. (2020). Diffusion Geometry of Multiplex
 #' and Interdependent Systems.
-#' \href{http://arxiv.org/abs/2006.13032}{arxiv preprint arxiv:2006.13032}
+#' \href{https://arxiv.org/abs/2006.13032}{arxiv preprint arxiv:2006.13032}
 #' @export
 get_diffusion_probability_matrix_from_T <- function(Pi, tau) {
   N <- nrow(Pi)

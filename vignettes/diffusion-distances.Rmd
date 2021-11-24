@@ -100,8 +100,9 @@ igraph_options(vertex.frame.color = "white", vertex.color = "#00B4A6")
 df <- read.delim(url("http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/zachary.dat"), 
                  skip = 41, sep = " ", header = FALSE)
 A <- as.matrix(df[, -1])
-colnames(A) <- rownames(A) <- c("H", 2:33, "A")
+colnames(A) <- rownames(A) <- c("Mr Hi", paste("Actor", 2:33), "John A")
 karate <- graph_from_adjacency_matrix(A, mode = "undirected", weighted = TRUE)
+V(karate)$name <- c("H", 2:33, "A")
 V(karate)$Faction <- 1
 V(karate)$Faction[c(9, 10, 15, 16, 19, 21, 23:34)] <- 2
 V(karate)$color <- c("#66c2a5", "#fc8d62")[V(karate)$Faction]
