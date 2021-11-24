@@ -16,23 +16,23 @@ plotHeatmap(
 \arguments{
 \item{DM}{a distance matrix}
 
-\item{colPalette}{`r lifecycle::badge("deprecated")` in the new function [plot_distance_matrix()]
+\item{colPalette}{`r lifecycle::badge("deprecated")` in the new function \link{plot_distance_matrix}
 it is called \code{col_palette}}
 
-\item{log.scale}{`r lifecycle::badge("deprecated")` in the new function [plot_distance_matrix()]
+\item{log.scale}{`r lifecycle::badge("deprecated")` in the new function \link{plot_distance_matrix}
 it is called \code{log_scale}}
 
 \item{cex}{numerical value by which text should be magnified (default font
 size in [ggplot2:theme] is 11)}
 
-\item{showDendrogram}{`r lifecycle::badge("deprecated")` in the new function [plot_distance_matrix()]
+\item{showDendrogram}{`r lifecycle::badge("deprecated")` in the new function \link{plot_distance_matrix}
 it is called \code{show_dendro}}
 
-\item{title}{Title of the plot passed to [ggplot]. No title by
+\item{title}{Title of the plot passed to \link[ggplot2]{labs}. No title by
 default}
 }
 \value{
-a [ggplot2] plot
+a \link[ggplot2]{ggplot}
 }
 \description{
 `r lifecycle::badge("deprecated")`

@@ -177,8 +177,7 @@ getLaplacianMatrix <- get_laplacian
 #' @param verbose default \code{TRUE}. If information on the type of Laplacian
 #' or on edge weights should be printed.
 #' @return The matrix \eqn{exp^{-\tau L}}, exponential of a Laplacian matrix.
-#' @keywords stochastic matrix, transition probability matrix,
-#' continuous-time Markov chain, diffusion probability
+#' @keywords Markov-chain transition probabilities
 #' @seealso \code{\link{get_laplacian}, \link{get_distance_matrix}}
 #' @references
 #'   De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of

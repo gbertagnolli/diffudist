@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Plot distance matrix — plot_distance_matrix" />
-<meta property="og:description" content="Plot a heatmap of the distance matrix using ggplot. Useful if used with multiplot ([source](http://stackoverflow.com/questions/6673162/reproducing-lattice-dendrogram-graph-with-ggplot2))" />
+<meta property="og:description" content="Plot a heatmap of the distance matrix using geom_tile." />
 
 
 
@@ -87,6 +87,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/diffusion-distances.html">Computing diffusion distances between network's nodes</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -114,7 +126,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Plot a heatmap of the distance matrix using ggplot. Useful if used with multiplot ([source](http://stackoverflow.com/questions/6673162/reproducing-lattice-dendrogram-graph-with-ggplot2))</p>
+    <p>Plot a heatmap of the distance matrix using <a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_distance_matrix</span><span class='op'>(</span>
@@ -123,7 +135,7 @@
   log_scale <span class='op'>=</span> <span class='cn'>F</span>,
   cex <span class='op'>=</span> <span class='fl'>1</span>,
   show_dendro <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  title <span class='op'>=</span> <span class='cn'>NULL</span>
+  title <span class='op'>=</span> <span class='st'>""</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -136,8 +148,8 @@
     <tr>
       <th>col_palette</th>
       <td><p>a colour palette, previously it was set to the `spectral`
-palette of [RColorBrewer::brewer.pal] but now it is, by default, to the
-color-blind firendly [viridis::viridis].</p></td>
+palette of <a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a> but now it is, by default, to the
+color-blind firendly <a href='https://sjmgarnier.github.io/viridisLite/reference/viridis.html'>viridis</a>.</p></td>
     </tr>
     <tr>
       <th>log_scale</th>
@@ -146,23 +158,22 @@ color-blind firendly [viridis::viridis].</p></td>
     <tr>
       <th>cex</th>
       <td><p>numerical value by which text should be magnified (default font
-size in [ggplot2:theme] is 11)</p></td>
+size in <a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a> is 11)</p></td>
     </tr>
     <tr>
       <th>show_dendro</th>
-      <td><p>If the dendrogram resulting from [stats::hclust] should
+      <td><p>If the dendrogram resulting from <a href='https://rdrr.io/r/stats/hclust.html'>hclust</a> should
 be shown. Default TRUE</p></td>
     </tr>
     <tr>
       <th>title</th>
-      <td><p>Title of the plot passed to [ggplot]. No title by
-default</p></td>
+      <td><p>Title of the plot passed to <a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a>. No title by default.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>plot [ggplot]</p>
+    <p>plot <a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

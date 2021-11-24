@@ -17,24 +17,24 @@ plot_distance_matrix(
 \item{DM}{a distance matrix}
 
 \item{col_palette}{a colour palette, previously it was set to the `spectral`
-palette of [RColorBrewer::brewer.pal] but now it is, by default, to the
-color-blind firendly [viridis::viridis].}
+palette of \link[RColorBrewer]{brewer.pal} but now it is, by default, to the
+color-blind firendly \link[viridis]{viridis}.}
 
 \item{log_scale}{logical. Default FALSE}
 
 \item{cex}{numerical value by which text should be magnified (default font
-size in [ggplot2:theme] is 11)}
+size in \link[ggplot2]{theme} is 11)}
 
-\item{show_dendro}{If the dendrogram resulting from [stats::hclust] should
+\item{show_dendro}{If the dendrogram resulting from \link[stats]{hclust} should
 be shown. Default TRUE}
 
-\item{title}{Title of the plot passed to [ggplot]. No title by default.}
+\item{title}{Title of the plot passed to \link[ggplot2]{labs}. No title by default.}
 }
 \value{
-plot [ggplot]
+plot \link[ggplot2]{ggplot}
 }
 \description{
-Plot a heatmap of the distance matrix using ggplot. Useful if used with multiplot ([source](http://stackoverflow.com/questions/6673162/reproducing-lattice-dendrogram-graph-with-ggplot2))
+Plot a heatmap of the distance matrix using \link[ggplot2]{geom_tile}.
 }
 \keyword{distance}
 \keyword{heatmap}

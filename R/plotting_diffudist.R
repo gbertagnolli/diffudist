@@ -4,22 +4,22 @@
 #' @title Plot distance matrix
 #'
 #' @description
-#' Plot a heatmap of the distance matrix using ggplot. Useful if used with multiplot ([source](http://stackoverflow.com/questions/6673162/reproducing-lattice-dendrogram-graph-with-ggplot2))
+#' Plot a heatmap of the distance matrix using \link[ggplot2]{geom_tile}.
 #'
 #' @param DM a distance matrix
 #' @param col_palette a colour palette, previously it was set to the `spectral`
-#'   palette of [RColorBrewer::brewer.pal] but now it is, by default, to the
-#'   color-blind firendly [viridis::viridis].
+#'   palette of \link[RColorBrewer]{brewer.pal} but now it is, by default, to the
+#'   color-blind firendly \link[viridis]{viridis}.
 #'
 #' @param log_scale logical. Default FALSE
 #' @param cex numerical value by which text should be magnified (default font
-#'   size in [ggplot2:theme] is 11)
-#' @param show_dendro If the dendrogram resulting from [stats::hclust] should
+#'   size in \link[ggplot2]{theme} is 11)
+#' @param show_dendro If the dendrogram resulting from \link[stats]{hclust} should
 #'   be shown. Default TRUE
-#' @param title Title of the plot passed to [ggplot]. No title by default.
+#' @param title Title of the plot passed to \link[ggplot2]{labs}. No title by default.
 #' @importFrom ggplot2 ggplot aes element_text element_blank element_line unit theme labs guide_colourbar
 #' @importFrom rlang .data
-#' @return plot [ggplot]
+#' @return plot \link[ggplot2]{ggplot}
 #' @keywords plot; distance matrix; heatmap
 #' @export
 plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
@@ -158,17 +158,17 @@ plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #' @param DM a distance matrix
-#' @param colPalette `r lifecycle::badge("deprecated")` in the new function [plot_distance_matrix()]
+#' @param colPalette `r lifecycle::badge("deprecated")` in the new function \link{plot_distance_matrix}
 #' it is called \code{col_palette}
-#' @param log.scale `r lifecycle::badge("deprecated")` in the new function [plot_distance_matrix()]
+#' @param log.scale `r lifecycle::badge("deprecated")` in the new function \link{plot_distance_matrix}
 #' it is called \code{log_scale}
 #' @param cex numerical value by which text should be magnified (default font
 #'   size in [ggplot2:theme] is 11)
-#' @param showDendrogram `r lifecycle::badge("deprecated")` in the new function [plot_distance_matrix()]
+#' @param showDendrogram `r lifecycle::badge("deprecated")` in the new function \link{plot_distance_matrix}
 #' it is called \code{show_dendro}
-#' @param title Title of the plot passed to [ggplot]. No title by
+#' @param title Title of the plot passed to \link[ggplot2]{labs}. No title by
 #'   default
-#' @return a [ggplot2] plot
+#' @return a \link[ggplot2]{ggplot}
 #' @export
 plotHeatmap <- function(DM, colPalette = rev(RColorBrewer::brewer.pal(11, "Spectral")),
                         log.scale = F, cex = 1, showDendrogram = TRUE, title = "") {

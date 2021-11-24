@@ -80,11 +80,6 @@ De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of
 \seealso{
 \code{\link{get_laplacian}, \link{get_distance_matrix}}
 }
-\keyword{Markov}
-\keyword{chain,}
-\keyword{continuous-time}
-\keyword{diffusion}
-\keyword{matrix,}
-\keyword{probability}
-\keyword{stochastic}
+\keyword{Markov-chain}
+\keyword{probabilities}
 \keyword{transition}

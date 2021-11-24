@@ -96,6 +96,18 @@ walker is in node \(i\) at time \(\tau = 0\) with probability 1." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/diffusion-distances.html">Computing diffusion distances between network's nodes</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -140,12 +152,20 @@ walker is in node \(i\) at time \(\tau = 0\) with probability 1.</p>
   <span class='va'>tau</span>,
   type <span class='op'>=</span> <span class='st'>"Normalized Laplacian"</span>,
   weights <span class='op'>=</span> <span class='cn'>NULL</span>,
+  as_dist <span class='op'>=</span> <span class='cn'>FALSE</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 
 <span class='fu'>getDistanceMatrix</span><span class='op'>(</span><span class='va'>g</span>, <span class='va'>tau</span>, type <span class='op'>=</span> <span class='st'>"Normalized Laplacian"</span>, weights <span class='op'>=</span> <span class='cn'>NULL</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>get_DDM</span><span class='op'>(</span><span class='va'>g</span>, <span class='va'>tau</span>, type <span class='op'>=</span> <span class='st'>"Normalized Laplacian"</span>, weights <span class='op'>=</span> <span class='cn'>NULL</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+<span class='fu'>get_DDM</span><span class='op'>(</span>
+  <span class='va'>g</span>,
+  <span class='va'>tau</span>,
+  type <span class='op'>=</span> <span class='st'>"Normalized Laplacian"</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>,
+  as_dist <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,6 +205,12 @@ it will be used automatically.
 If this is NA then no weights are used (even if the graph has a weight attribute).</p></td>
     </tr>
     <tr>
+      <th>as_dist</th>
+      <td><p>If the function should return a matrix or an object of class "dist" as
+returned from [stats::as.dist]. Default is FALSE if the number of nodes is smaller
+than 1000.</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
       <td><p>default TRUE</p></td>
     </tr>
@@ -205,10 +231,11 @@ is the generator of the continuous-time Markov chain.</p>
 
     <p>De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of
   Functional Clusters in Collective Phenomena. Physical Review Letters.
-  <a href='https://doi.org/10.1103/PhysRevLett.118.168301'>doi: 10.1103/PhysRevLett.118.168301</a></p>
+  doi: <a href='https://doi.org/10.1103/PhysRevLett.118.168301'>10.1103/PhysRevLett.118.168301</a></p>
 <p>Bertagnolli, G., &amp; De Domenico, M. (2021). Diffusion geometry of multiplex and
   interdependent systems. Physical Review E, 103(4), 042301.
-  <a href='https://doi.org/10.1103/PhysRevE.103.042301'>doi: 10.1103/PhysRevE.103.042301</a>
+  doi: <a href='https://doi.org/10.1103/PhysRevE.103.042301'>10.1103/PhysRevE.103.042301</a>
+
   <a href='https://arxiv.org/abs/2006.13032'>arXiv: 2006.13032</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
