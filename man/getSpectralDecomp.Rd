@@ -4,12 +4,15 @@
 \alias{get_spectral_decomp}
 \title{Laplacian Spectral Decomposition}
 \usage{
-get_spectral_decomp(g, type = "Normalized Laplacian", verbose = F)
+get_spectral_decomp(g, type = "Normalized Laplacian", verbose = FALSE)
 }
 \arguments{
 \item{g}{the network in the [igraph] format}
 
-\item{type}{c("Laplacian", "Normalized Laplacian", "Quantum Laplacian"), default "Normalized Laplacian".}
+\item{type}{the Laplacian type, default "Normalized Laplacian".
+At the moment this is the only available option. For other types of Laplacians
+one should get autonomously the eigendecomposition, e.g. using \link[base]{eigen}.
+See the package vignette for an example.}
 
 \item{verbose}{whether warnings have to be printed or not}
 }
@@ -29,4 +32,7 @@ Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
   interdependent systems. Physical Review E, 103(4), 042301.
   \doi{10.1103/PhysRevE.103.042301}
   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
+}
+\seealso{
+\code{\link{get_laplacian}} \code{\link{get_ddm_from_eigendec}}
 }

@@ -109,7 +109,7 @@ get_laplacian <- function(g,  type = "Laplacian", weights = NULL, verbose = TRUE
       cat("The network is not strongly connected!\n")
       cat("It is not guaranteed that the Perron-Frobenius theorem holds!\n")
     }
-    tmp <- eigen(A, only.values = F)
+    tmp <- eigen(A, only.values = FALSE)
     leading_eigenvalue <- tmp$values[which.max(tmp$values)]
     leading_eigenvector <- c(tmp$vectors[, which.max(tmp$values)])
     if (all(leading_eigenvector[which(leading_eigenvector != 0)] < 0)) {

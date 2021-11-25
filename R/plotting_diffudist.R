@@ -23,7 +23,7 @@
 #' @keywords plot; distance matrix; heatmap
 #' @export
 plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
-                        log_scale = F, cex = 1, show_dendro = TRUE,
+                        log_scale = FALSE, cex = 1, show_dendro = TRUE,
                         title = "") {
 
   # This assumes that the input is a matrix
@@ -171,7 +171,7 @@ plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
 #' @return a \link[ggplot2]{ggplot}
 #' @export
 plotHeatmap <- function(DM, colPalette = rev(RColorBrewer::brewer.pal(11, "Spectral")),
-                        log.scale = F, cex = 1, showDendrogram = TRUE, title = "") {
+                        log.scale = FALSE, cex = 1, showDendrogram = TRUE, title = "") {
   .Deprecated("plot_distance_matrix")
   return(
     plot_distance_matrix(DM, col_palette = colPalette, log_scale = log.scale, cex = cex,

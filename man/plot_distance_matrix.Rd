@@ -7,7 +7,7 @@
 plot_distance_matrix(
   DM,
   col_palette = viridis::viridis(n = 11),
-  log_scale = F,
+  log_scale = FALSE,
   cex = 1,
   show_dendro = TRUE,
   title = ""

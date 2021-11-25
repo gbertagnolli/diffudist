@@ -15,7 +15,8 @@ get_distance_matrix(
   verbose = TRUE
 )
 
-getDistanceMatrix(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE)
+getDistanceMatrix(g, tau, type = "Normalized Laplacian", weights = NULL,
+                         verbose = TRUE)
 
 get_DDM(
   g,
@@ -49,9 +50,9 @@ Note that you can type abbreviations, e.g. "L", "N", "Q", "M" for the
 respective types (case is ignored). The argument match is done through
 \code{\link[strex]{match_arg}}.}
 
-\item{weights}{edge weights, representing the strength/intensity (not the cost!) of each link.
-if weights is NULL (the default) and g has an edge attribute called weight, then
-it will be used automatically.
+\item{weights}{edge weights, representing the strength/intensity (not the cost!)
+of each link. If weights is NULL (the default) and g has an edge attribute
+called weight, then it will be used automatically.
 If this is NA then no weights are used (even if the graph has a weight attribute).}
 
 \item{as_dist}{If the function should return a matrix or an object of class "dist" as
@@ -61,9 +62,12 @@ than 1000.}
 \item{verbose}{default TRUE}
 }
 \value{
-The diffusion distance matrix \eqn{D_t}, i.e. the Euclidean
-(\eqn{L^2}) norm between the rows of \eqn{exp^{-\tau L}}, where \eqn{-L}
-is the generator of the continuous-time Markov chain.
+The diffusion distance matrix \eqn{D_t}, a square numeric matrix
+  of the \eqn{L^2}-norm distances between posterior probability vectors, i.e.
+  Euclidean distances between the rows of the stochastic matrix
+  \eqn{P(t) = e^{-\tau L}}, where \eqn{-L = -(I - T)} is the generator of the
+  continuous-time random walk (Markov chain) of given \code{type} over network
+  \code{g}.
 }
 \description{
 Returns a matrix where each entry encodes the diffusion distance

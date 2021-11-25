@@ -31,17 +31,20 @@
 #' Note that you can type abbreviations, e.g. "L", "N", "Q", "M" for the
 #' respective types (case is ignored). The argument match is done through
 #' \code{\link[strex]{match_arg}}.
-#' @param weights edge weights, representing the strength/intensity (not the cost!) of each link.
-#'    if weights is NULL (the default) and g has an edge attribute called weight, then
-#'    it will be used automatically.
-#'    If this is NA then no weights are used (even if the graph has a weight attribute).
+#' @param weights edge weights, representing the strength/intensity (not the cost!)
+#'   of each link. If weights is NULL (the default) and g has an edge attribute
+#'   called weight, then it will be used automatically.
+#'   If this is NA then no weights are used (even if the graph has a weight attribute).
 #' @param as_dist If the function should return a matrix or an object of class "dist" as
 #'   returned from [stats::as.dist]. Default is FALSE if the number of nodes is smaller
 #'   than 1000.
 #' @param verbose default TRUE
-#' @return The diffusion distance matrix \eqn{D_t}, i.e. the Euclidean
-#' (\eqn{L^2}) norm between the rows of \eqn{exp^{-\tau L}}, where \eqn{-L}
-#' is the generator of the continuous-time Markov chain.
+#' @return The diffusion distance matrix \eqn{D_t}, a square numeric matrix
+#'   of the \eqn{L^2}-norm distances between posterior probability vectors, i.e.
+#'   Euclidean distances between the rows of the stochastic matrix
+#'   \eqn{P(t) = e^{-\tau L}}, where \eqn{-L = -(I - T)} is the generator of the
+#'   continuous-time random walk (Markov chain) of given \code{type} over network
+#'   \code{g}.
 #' @keywords diffusion distance
 #' @seealso \code{\link{get_diffusion_probability_matrix}}
 #' @references
@@ -102,9 +105,11 @@ get_distance_matrix <- function(g, tau, type = "Normalized Laplacian", weights =
 # get_distance_matrix <- compiler::cmpfun(getDistanceMatrixRaw)
 
 #' @describeIn get_distance_matrix Old deprecated function
-#' @usage getDistanceMatrix(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE)
+#' @usage getDistanceMatrix(g, tau, type = "Normalized Laplacian", weights = NULL,
+#'                          verbose = TRUE)
 #' @export
-getDistanceMatrix <- function(g, tau, type = "Normalized Laplacian", weights = NULL, verbose = TRUE) {
+getDistanceMatrix <- function(g, tau, type = "Normalized Laplacian", weights = NULL,
+                              verbose = TRUE) {
   .Deprecated("get_distance_matrix")
   return(get_distance_matrix(g, tau, type = type, weights = weights, verbose = verbose))
 }
@@ -134,9 +139,12 @@ get_DDM <- get_distance_matrix
 #' @param Pi a transition matrix (it should be a stochastic matrix)
 #' @param tau diffusion time
 #' @param verbose default TRUE
-#' @return The diffusion distance matrix \eqn{D_t}, i.e. the Euclidean
-#' (\eqn{L^2}) norm between the rows of \eqn{exp^{-\tau L}}, where
-#' \eqn{-L = -(I - Pi)} is the generator of the continuous-time Markov chain.
+#' @return The diffusion distance matrix \eqn{D_t}, a square numeric matrix
+#'   of the \eqn{L^2}-norm distances between posterior probability vectors, i.e.
+#'   Euclidean distances between the rows of the stochastic matrix
+#'   \eqn{P(t) = e^{-\tau L}}, where \eqn{-L = -(I - T)} is the generator of the
+#'   continuous-time random walk (Markov chain) corresponding to the
+#'   discrete-time transition matrix \eqn{T=}\code{Pi}.
 #' @keywords diffusion distance
 #' @seealso \code{\link{get_distance_matrix} \link{get_diffusion_probability_matrix},
 #' \link{get_diffusion_probability_matrix_from_T}}

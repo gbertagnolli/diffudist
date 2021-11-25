@@ -156,7 +156,8 @@ walker is in node \(i\) at time \(\tau = 0\) with probability 1.</p>
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 
-<span class='fu'>getDistanceMatrix</span><span class='op'>(</span><span class='va'>g</span>, <span class='va'>tau</span>, type <span class='op'>=</span> <span class='st'>"Normalized Laplacian"</span>, weights <span class='op'>=</span> <span class='cn'>NULL</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>getDistanceMatrix</span><span class='op'>(</span><span class='va'>g</span>, <span class='va'>tau</span>, type <span class='op'>=</span> <span class='st'>"Normalized Laplacian"</span>, weights <span class='op'>=</span> <span class='cn'>NULL</span>,
+                         verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='fu'>get_DDM</span><span class='op'>(</span>
   <span class='va'>g</span>,
@@ -199,9 +200,9 @@ respective types (case is ignored). The argument match is done through
     </tr>
     <tr>
       <th>weights</th>
-      <td><p>edge weights, representing the strength/intensity (not the cost!) of each link.
-if weights is NULL (the default) and g has an edge attribute called weight, then
-it will be used automatically.
+      <td><p>edge weights, representing the strength/intensity (not the cost!)
+of each link. If weights is NULL (the default) and g has an edge attribute
+called weight, then it will be used automatically.
 If this is NA then no weights are used (even if the graph has a weight attribute).</p></td>
     </tr>
     <tr>
@@ -218,9 +219,12 @@ than 1000.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The diffusion distance matrix \(D_t\), i.e. the Euclidean
-(\(L^2\)) norm between the rows of \(exp^{-\tau L}\), where \(-L\)
-is the generator of the continuous-time Markov chain.</p>
+    <p>The diffusion distance matrix \(D_t\), a square numeric matrix
+  of the \(L^2\)-norm distances between posterior probability vectors, i.e.
+  Euclidean distances between the rows of the stochastic matrix
+  \(P(t) = e^{-\tau L}\), where \(-L = -(I - T)\) is the generator of the
+  continuous-time random walk (Markov chain) of given <code>type</code> over network
+  <code>g</code>.</p>
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     

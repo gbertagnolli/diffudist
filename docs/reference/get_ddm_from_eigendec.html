@@ -40,12 +40,14 @@
 
 
 <meta property="og:title" content="Distance Matrix from Laplacian spectral decomposition — get_ddm_from_eigendec" />
-<meta property="og:description" content="Returns the diffusion distance matrix when the spectrum is provided as
+<meta property="og:description" content="Returns the diffusion distance matrix when the spectrum (more precisely,
+   the eigendecomposition) of the Laplacian is provided as
    input (useful to speed up batch calculations).
-   Furthermore, remember that the spectral decomposition of the random walk
-   normalised Laplacian \(I - D^{-1}A\) can be more easily and quickly
-   obtained from the spectral decomposition of the symmetric normalised
-   Laplacian \(\mathcal{L} = D^{-\frac{1}{2}} L D^{-\frac{1}{2}} = D^{-\frac{1}{2}} (D - A) D^{-\frac{1}{2}}\).
+For instance, the random walk normalised Laplacian \(I - D^{-1}A\),
+   which generates the classical continuous-time random walk over a network,
+   can be easily and obtained from the spectral decomposition of the symmetric
+   normalised Laplacian
+   \(\mathcal{L} = D^{-\frac{1}{2}} L D^{-\frac{1}{2}} = D^{-\frac{1}{2}} (D - A) D^{-\frac{1}{2}}\).
    More specifically,
    \(\bar{L} = I - D^{-1} A = D^{-\frac{1}{2}} \mathcal{L} D^{\frac{1}{2}}\)
    and, since \(\mathcal{L}\) is symmetric it can be decomposed into
@@ -137,12 +139,14 @@
     </div>
 
     <div class="ref-description">
-    <p>Returns the diffusion distance matrix when the spectrum is provided as
-   input (useful to speed up batch calculations).
-   Furthermore, remember that the spectral decomposition of the random walk
-   normalised Laplacian \(I - D^{-1}A\) can be more easily and quickly
-   obtained from the spectral decomposition of the symmetric normalised
-   Laplacian \(\mathcal{L} = D^{-\frac{1}{2}} L D^{-\frac{1}{2}} = D^{-\frac{1}{2}} (D - A) D^{-\frac{1}{2}}\).
+    <p>Returns the diffusion distance matrix when the spectrum (more precisely,
+   the eigendecomposition) of the Laplacian is provided as
+   input (useful to speed up batch calculations).</p>
+<p>For instance, the random walk normalised Laplacian \(I - D^{-1}A\),
+   which generates the classical continuous-time random walk over a network,
+   can be easily and obtained from the spectral decomposition of the symmetric
+   normalised Laplacian
+   \(\mathcal{L} = D^{-\frac{1}{2}} L D^{-\frac{1}{2}} = D^{-\frac{1}{2}} (D - A) D^{-\frac{1}{2}}\).
    More specifically,
    \(\bar{L} = I - D^{-1} A = D^{-\frac{1}{2}} \mathcal{L} D^{\frac{1}{2}}\)
    and, since \(\mathcal{L}\) is symmetric it can be decomposed into
@@ -178,6 +182,14 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The diffusion distance matrix \(D_t\), a square numeric matrix
+  of the Euclidean distances between the rows of the stochastic matrix
+  \(P(t) = e^{-\tau L}\), where \(-L\) is the Laplacian generating a
+  continuous-time random walk (Markov chain) over the network.
+  The matrix exponential is here computed using the given eigendecomposition
+  of the Laplacian matrix \(e^{-\tau L} = Q e^{-\tau \Lambda} Q^{-1}\).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Bertagnolli, G., &amp; De Domenico, M. (2021). Diffusion geometry of multiplex and
@@ -185,6 +197,9 @@
   doi: <a href='https://doi.org/10.1103/PhysRevE.103.042301'>10.1103/PhysRevE.103.042301</a>
 
   <a href='https://arxiv.org/abs/2006.13032'>arXiv: 2006.13032</a></p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='get_spectral_decomp.html'>get_spectral_decomp</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

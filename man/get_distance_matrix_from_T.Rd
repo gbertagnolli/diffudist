@@ -23,9 +23,12 @@ get_DDM_from_Pi(Pi, tau, verbose = TRUE)
 \item{verbose}{default TRUE}
 }
 \value{
-The diffusion distance matrix \eqn{D_t}, i.e. the Euclidean
-(\eqn{L^2}) norm between the rows of \eqn{exp^{-\tau L}}, where
-\eqn{-L = -(I - Pi)} is the generator of the continuous-time Markov chain.
+The diffusion distance matrix \eqn{D_t}, a square numeric matrix
+  of the \eqn{L^2}-norm distances between posterior probability vectors, i.e.
+  Euclidean distances between the rows of the stochastic matrix
+  \eqn{P(t) = e^{-\tau L}}, where \eqn{-L = -(I - T)} is the generator of the
+  continuous-time random walk (Markov chain) corresponding to the
+  discrete-time transition matrix \eqn{T=}\code{Pi}.
 }
 \description{
 Returns a matrix where each entry encodes the diffusion distance

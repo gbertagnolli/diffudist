@@ -7,7 +7,7 @@
 plotHeatmap(
   DM,
   colPalette = rev(RColorBrewer::brewer.pal(11, "Spectral")),
-  log.scale = F,
+  log.scale = FALSE,
   cex = 1,
   showDendrogram = TRUE,
   title = ""

@@ -17,13 +17,24 @@ get_ddm_from_eigendec(tau, Q, Q_inv, lambdas, verbose = FALSE)
 
 \item{verbose}{whether warnings have to be printed or not}
 }
+\value{
+The diffusion distance matrix \eqn{D_t}, a square numeric matrix
+  of the Euclidean distances between the rows of the stochastic matrix
+  \eqn{P(t) = e^{-\tau L}}, where \eqn{-L} is the Laplacian generating a
+  continuous-time random walk (Markov chain) over the network.
+  The matrix exponential is here computed using the given eigendecomposition
+  of the Laplacian matrix \eqn{e^{-\tau L} = Q e^{-\tau \Lambda} Q^{-1}}.
+}
 \description{
-Returns the diffusion distance matrix when the spectrum is provided as
+Returns the diffusion distance matrix when the spectrum (more precisely,
+   the eigendecomposition) of the Laplacian is provided as
    input (useful to speed up batch calculations).
-   Furthermore, remember that the spectral decomposition of the random walk
-   normalised Laplacian \eqn{I - D^{-1}A} can be more easily and quickly
-   obtained from the spectral decomposition of the symmetric normalised
-   Laplacian \eqn{\mathcal{L} = D^{-\frac{1}{2}} L D^{-\frac{1}{2}} = D^{-\frac{1}{2}} (D - A) D^{-\frac{1}{2}}}.
+
+   For instance, the random walk normalised Laplacian \eqn{I - D^{-1}A},
+   which generates the classical continuous-time random walk over a network,
+   can be easily and obtained from the spectral decomposition of the symmetric
+   normalised Laplacian
+   \eqn{\mathcal{L} = D^{-\frac{1}{2}} L D^{-\frac{1}{2}} = D^{-\frac{1}{2}} (D - A) D^{-\frac{1}{2}}}.
    More specifically,
    \eqn{\bar{L} = I - D^{-1} A = D^{-\frac{1}{2}} \mathcal{L} D^{\frac{1}{2}}}
    and, since \eqn{\mathcal{L}} is symmetric it can be decomposed into
@@ -36,4 +47,7 @@ Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
   interdependent systems. Physical Review E, 103(4), 042301.
   \doi{10.1103/PhysRevE.103.042301}
   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
+}
+\seealso{
+\code{\link{get_spectral_decomp}}
 }
