@@ -8,6 +8,8 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/gbertagnolli/diffudist/workflows/R-CMD-check/badge.svg)](https://github.com/gbertagnolli/diffudist/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/diffudist)](https://CRAN.R-project.org/package=diffudist)
 <!-- badges: end -->
 
 ## Overview
@@ -61,15 +63,17 @@ plot(g, vertex.label = vertex_labels, vertex.size = 6 + 10 * (deg_g - min(deg_g)
 ![](man/figures/plot-g-1.png)<!-- -->
 
 ``` r
-D <- get_DDM(g, tau = 2, type = "Normalized Laplacian", verbose = FALSE)
-MERW_Pt <- get_diffu_Pt(g, tau = 2, type = "MERW")
+D <- get_distance_matrix(g, tau = 2, type = "Normalized Laplacian", verbose = FALSE)
+# or, for short:
+# get_DDM(g, tau = 2, type = "Normalized Laplacian", verbose = FALSE)
+MERW_Pt <- get_diffusion_probability_matrix(g, tau = 2, type = "MERW")
 #> Unweighted network.
 #> Evaluating the MERW Normalized Laplacian matrix
 ```
 
 The probability transition matrix returned from
 `get_diffusion_probability_matrix` (or its shortened version
-`get_diffu_Pt`) is the matrix *e*<sup> − *τ**L*<sub>rw</sub></sup>. The
+`get_diffu_Pt`) is the matrix *e*<sup>−*τ**L*<sub>rw</sub></sup>. The
 diffusion dynamics is controlled by the specific Laplacian matrix
 *L*<sub>rw</sub> = *I* − *T*<sub>rw</sub>, where *T*<sub>rw</sub> is the
 jump matrix of the discrete-time random walk corresponding to our

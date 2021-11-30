@@ -19,10 +19,11 @@
 #' @param title Title of the plot passed to \link[ggplot2]{labs}. No title by default.
 #' @importFrom ggplot2 ggplot aes element_text element_blank element_line unit theme labs guide_colourbar
 #' @importFrom rlang .data
+#' @importFrom viridis viridis
 #' @return plot \link[ggplot2]{ggplot}
 #' @keywords plot; distance matrix; heatmap
 #' @export
-plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
+plot_distance_matrix <- function(DM, col_palette = viridis(n = 11),
                         log_scale = FALSE, cex = 1, show_dendro = TRUE,
                         title = "") {
 
@@ -82,7 +83,7 @@ plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
       ggplot2::coord_equal() +
       ggplot2::scale_fill_gradientn(colours = col_palette, guide = "none") +
       ggplot2::guides(
-        fill = guide_colourbar(barheight = 20, nbin = 100)
+        fill = guide_colourbar(barheight = default_theme$legend.key.size * 10, nbin = 100)
       ) +
       labs(x = "", y = "", fill = "distance", title = title) +
       theme(
@@ -94,7 +95,7 @@ plot_distance_matrix <- function(DM, col_palette = viridis::viridis(n = 11),
         axis.ticks.length = unit(10, "pt"),
         axis.text = element_text(size = default_theme$axis.text$size * cex),
         legend.text = element_text(size = default_theme$legend.text$size * cex),
-        legend.title = element_text(size = default_theme$legend.text$size * cex),
+        legend.title = element_text(size = default_theme$legend.text$size * (cex + .4)),
         plot.title = element_text(size = default_theme$plot.title$size * cex),
         )
   } else {
