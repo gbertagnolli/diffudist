@@ -6,7 +6,7 @@
 \usage{
 plotHeatmap(
   DM,
-  colPalette = rev(RColorBrewer::brewer.pal(11, "Spectral")),
+  colPalette = NULL,
   log.scale = FALSE,
   cex = 1,
   showDendrogram = TRUE,
@@ -16,10 +16,12 @@ plotHeatmap(
 \arguments{
 \item{DM}{a distance matrix}
 
-\item{colPalette}{`r lifecycle::badge("deprecated")` in the new function \link{plot_distance_matrix}
+\item{colPalette}{`r lifecycle::badge("deprecated")` in the new function
+  \link{plot_distance_matrix}
 it is called \code{col_palette}}
 
-\item{log.scale}{`r lifecycle::badge("deprecated")` in the new function \link{plot_distance_matrix}
+\item{log.scale}{`r lifecycle::badge("deprecated")` in the new function
+  \link{plot_distance_matrix}
 it is called \code{log_scale}}
 
 \item{cex}{numerical value by which text should be magnified (default font

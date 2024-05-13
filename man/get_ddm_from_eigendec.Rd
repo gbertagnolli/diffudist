@@ -4,7 +4,7 @@
 \alias{get_ddm_from_eigendec}
 \title{Distance Matrix from Laplacian spectral decomposition}
 \usage{
-get_ddm_from_eigendec(tau, Q, Q_inv, lambdas, verbose = FALSE)
+get_ddm_from_eigendec(tau, Q, Q_inv, lambdas, as_dist = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{tau}{diffusion time (scalar)}
@@ -43,8 +43,8 @@ Returns the diffusion distance matrix when the spectrum (more precisely,
    \eqn{u^L_l = u_l^T D^{\frac{1}{2}}} and \eqn{u^R_l = u_l D^{-\frac{1}{2}}}.
 }
 \references{
-Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
-  interdependent systems. Physical Review E, 103(4), 042301.
+Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of
+  multiplex and interdependent systems. Physical Review E, 103(4), 042301.
   \doi{10.1103/PhysRevE.103.042301}
   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
 }

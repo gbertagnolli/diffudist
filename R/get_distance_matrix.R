@@ -5,8 +5,8 @@
 #'
 #' The diffusion distance at time \eqn{\tau} between nodes \eqn{i, j \in G}
 #' is defined as
-#' \deqn{D_{\tau}(i, j) = \vert \mathbf{p}(t|i) - \mathbf{p}(t|j) \vert_2}
-#' with \eqn{\mathbf{p}(t|i) = (e^{- \tau L})_{i\cdot} = \mathbf{e}_i e^{- \tau L}}
+#' \deqn{D_{\tau}(i, j) = \vert \mathbf{p}(t|i) - \mathbf{p}(t|j) \vert_2} with
+#' \eqn{\mathbf{p}(t|i) = (e^{- \tau L})_{i\cdot} = \mathbf{e}_i e^{- \tau L}}
 #' indicating the i-th row of the stochastic matrix \eqn{e^{- \tau L}} and
 #' representing the probability (row) vector of a random walk dynamics
 #' corresponding to the initial condition \eqn{\mathbf{e}_i}, i.e. the random
@@ -31,20 +31,22 @@
 #' Note that you can type abbreviations, e.g. "L", "N", "Q", "M" for the
 #' respective types (case is ignored). The argument match is done through
 #' \code{\link[strex]{match_arg}}.
-#' @param weights edge weights, representing the strength/intensity (not the cost!)
+#' @param weights edge weights, representing the strength/intensity (not the
+#'   cost!)
 #'   of each link. If weights is NULL (the default) and g has an edge attribute
 #'   called weight, then it will be used automatically.
-#'   If this is NA then no weights are used (even if the graph has a weight attribute).
-#' @param as_dist If the function should return a matrix or an object of class "dist" as
-#'   returned from [stats::as.dist]. Default is FALSE if the number of nodes is smaller
-#'   than 1000.
+#'   If this is NA then no weights are used (even if the graph has a weight
+#'   attribute).
+#' @param as_dist If the function should return a matrix or an object of class
+#'   "dist" as returned from [stats::as.dist]. Default is FALSE if the number
+#'   of nodes is smaller than 1000.
 #' @param verbose default TRUE
 #' @return The diffusion distance matrix \eqn{D_t}, a square numeric matrix
 #'   of the \eqn{L^2}-norm distances between posterior probability vectors, i.e.
 #'   Euclidean distances between the rows of the stochastic matrix
 #'   \eqn{P(t) = e^{-\tau L}}, where \eqn{-L = -(I - T)} is the generator of the
-#'   continuous-time random walk (Markov chain) of given \code{type} over network
-#'   \code{g}.
+#'   continuous-time random walk (Markov chain) of given \code{type} over
+#'   network \code{g}.
 #' @keywords diffusion distance
 #' @seealso \code{\link{get_diffusion_probability_matrix}}
 #' @references
@@ -52,8 +54,8 @@
 #'   Functional Clusters in Collective Phenomena. Physical Review Letters.
 #'   \doi{10.1103/PhysRevLett.118.168301}
 #'
-#'   Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
-#'   interdependent systems. Physical Review E, 103(4), 042301.
+#'   Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex
+#'   and interdependent systems. Physical Review E, 103(4), 042301.
 #'   \doi{10.1103/PhysRevE.103.042301}
 #'   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
 #' @examples
@@ -61,8 +63,8 @@
 #' dm_crw <- get_distance_matrix(g, tau = 1)
 #' dm_merw <- get_distance_matrix(g, tau = 1, type = "MERW")
 #' @export
-get_distance_matrix <- function(g, tau, type = "Normalized Laplacian", weights = NULL,
-                                as_dist = FALSE, verbose = TRUE) {
+get_distance_matrix <- function(g, tau, type = "Normalized Laplacian",
+                            weights = NULL, as_dist = FALSE, verbose = TRUE) {
   # #by default weights are considered, if present
   # if ( is.null(igraph::E(g)$weight) ) {
   #   cat("Warning: missing edge weights. Assigning 1 by default\n")
@@ -96,22 +98,23 @@ get_distance_matrix <- function(g, tau, type = "Normalized Laplacian", weights =
     DM <- stats::dist(expL)
   }
   if ((!as_dist) && (length(igraph::V(g)) < 1000)) {
-    return(as.matrix(DM))
-  } else {
-    return(DM)
+    DM <- as.matrix(DM)
   }
+  class(DM) <- c("diffudist", class(DM))
+  return(DM)
 }
 
 # get_distance_matrix <- compiler::cmpfun(getDistanceMatrixRaw)
 
 #' @describeIn get_distance_matrix Old deprecated function
-#' @usage getDistanceMatrix(g, tau, type = "Normalized Laplacian", weights = NULL,
-#'                          verbose = TRUE)
+#' @usage getDistanceMatrix(g, tau, type = "Normalized Laplacian",
+#'                          weights = NULL, as_dist = FALSE, verbose = TRUE)
 #' @export
-getDistanceMatrix <- function(g, tau, type = "Normalized Laplacian", weights = NULL,
-                              verbose = TRUE) {
+getDistanceMatrix <- function(g, tau, type = "Normalized Laplacian",
+                              weights = NULL, as_dist = FALSE, verbose = TRUE) {
   .Deprecated("get_distance_matrix")
-  return(get_distance_matrix(g, tau, type = type, weights = weights, verbose = verbose))
+  DM <- get_distance_matrix(g, tau, type = type, weights = weights, verbose = verbose)
+  return(DM)
 }
 
 #' @rdname get_distance_matrix
@@ -139,6 +142,9 @@ get_DDM <- get_distance_matrix
 #' @param Pi a transition matrix (it should be a stochastic matrix)
 #' @param tau diffusion time
 #' @param verbose default TRUE
+#' @param as_dist If the function should return a matrix or an object of class
+#'   "dist" as returned from [stats::as.dist]. Default is FALSE if the number
+#'   of nodes is smaller than 1000.
 #' @return The diffusion distance matrix \eqn{D_t}, a square numeric matrix
 #'   of the \eqn{L^2}-norm distances between posterior probability vectors, i.e.
 #'   Euclidean distances between the rows of the stochastic matrix
@@ -153,15 +159,13 @@ get_DDM <- get_distance_matrix
 #'   Functional Clusters in Collective Phenomena. Physical Review Letters.
 #'   \doi{10.1103/PhysRevLett.118.168301}
 #'
-#'   Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
-#'   interdependent systems. Physical Review E, 103(4), 042301.
+#'   Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex
+#'   and interdependent systems. Physical Review E, 103(4), 042301.
 #'   \doi{10.1103/PhysRevE.103.042301}
 #'   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
-#' @examples
-#' g <- igraph::sample_pa(10, directed = FALSE)
-#' dm <- get_distance_matrix(g, tau = 1)
 #' @export
-get_distance_matrix_from_T <- function(Pi, tau, verbose = TRUE) {
+get_distance_matrix_from_T <- function(Pi, tau, as_dist = FALSE,
+                                       verbose = TRUE) {
   Pi <- as.matrix(Pi)
   # check square matrix
   N <- nrow(Pi)
@@ -187,11 +191,13 @@ get_distance_matrix_from_T <- function(Pi, tau, verbose = TRUE) {
     # \sqrt(\sum_i (x_i - y_i) ^ 2))
     DM <- stats::dist(expL)
   }
-  DM <- as.matrix(DM)
+  if ((!as_dist) && (length(igraph::V(g)) < 1000)) {
+    DM <- as.matrix(DM)
+  }
   # names
   colnames(DM) <- colnames(Pi)
   rownames(DM) <- colnames(Pi)
-  # class(DM) <- "DtDistMatrix"
+  class(DM) <- c("diffudist", class(DM))
   return(DM)
 }
 
@@ -206,5 +212,3 @@ get_distance_matrix_from_Pi <- get_distance_matrix_from_T
 #' @rdname get_distance_matrix_from_T
 #' @export
 get_DDM_from_Pi <- get_distance_matrix_from_T
-
-

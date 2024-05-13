@@ -2,7 +2,11 @@
 #'
 #' @description
 #' Returns the eigenvalue spectrum together with eigenvectors of a Laplacian
-#' corresponding to a network.
+#' corresponding to a network. This involves computing the eigendecomposition of
+#' a (symmetric) matrix, so it is computationally intense and may take some time.
+#' The decomposition of the normalized Laplacian \eqn{L = I - D^{-1}A} takes
+#' is computed through the decomposition of its symmetric version
+#' \eqn{L = D^{-\frac{1}{2}}AD^{-\frac{1}{2}}}. See the package vignette for details.
 #' @param g the network in the [igraph] format
 #' @param type the Laplacian type, default "Normalized Laplacian".
 #'   At the moment this is the only available option. For other types of Laplacians
@@ -32,7 +36,7 @@ get_spectral_decomp <- function(g, type = "Normalized Laplacian", verbose = FALS
   if (igraph::gsize(g) > 0) {
     # L = D - A
     L <- igraph::laplacian_matrix(g, sparse = FALSE)
-    # D^{1/2}
+    # rename D = D^{1/2}
     D <- sqrt(igraph::strength(g, mode = "out"))
     D <- diag(D)
     # D^{-1/2}
@@ -41,16 +45,17 @@ get_spectral_decomp <- function(g, type = "Normalized Laplacian", verbose = FALS
     # (symmetric) normalised Laplacian
     L <- (D_inv %*% L) %*% D_inv
     s_dec <- eigen(L, symmetric = TRUE)
-    u_L <- t(s_dec$vectors) %*% D
+    u_L <- crossprod(s_dec$vectors, D)  # t(s_dec$vectors) %*% D
     u_R <- D_inv %*% s_dec$vectors
   } else {
     stop("Edge set is empty!")
   }
-  return(list(
+  res <- list(
     "lambdas" = s_dec$values,
     "u_L" = u_L,
     "u_R" = u_R
-  ))
+  )
+  return(res)
 }
 
 #' @title Distance Matrix from Laplacian spectral decomposition
@@ -83,17 +88,19 @@ get_spectral_decomp <- function(g, type = "Normalized Laplacian", verbose = FALS
 #'   The matrix exponential is here computed using the given eigendecomposition
 #'   of the Laplacian matrix \eqn{e^{-\tau L} = Q e^{-\tau \Lambda} Q^{-1}}.
 #' @seealso \code{\link{get_spectral_decomp}}
-#' @references Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
-#'   interdependent systems. Physical Review E, 103(4), 042301.
+#' @references Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of
+#'   multiplex and interdependent systems. Physical Review E, 103(4), 042301.
 #'   \doi{10.1103/PhysRevE.103.042301}
 #'   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
 #' @export
-get_ddm_from_eigendec <- function(tau, Q, Q_inv, lambdas,
+get_ddm_from_eigendec <- function(tau, Q, Q_inv, lambdas, as_dist = FALSE,
                                   verbose = FALSE) {
-  Nodes <- length(lambdas)
-  expL <- eigenMapMatMult(eigenMapMatMult(Q, as.matrix(diag(exp(-tau * lambdas)))), Q_inv)
+  N <- length(lambdas)
+  expL <- eigenMapMatMult(
+    eigenMapMatMult(Q, as.matrix(diag(exp(-tau * lambdas)))), Q_inv
+  )
   # expL <- Q %*% diag(exp(-tau * lambdas)) %*% Q_inv
-  if (abs(sum(expL) - Nodes) > 1e-6) {
+  if (abs(sum(expL) - N) > 1e-6) {
     stop("expL is not a stochastic matrix! Check the row sums.")
   }
   if (verbose) {
@@ -112,10 +119,12 @@ get_ddm_from_eigendec <- function(tau, Q, Q_inv, lambdas,
     # \sqrt(\sum_i (x_i - y_i) ^ 2))
     DM <- stats::dist(expL)
   }
-  DM <- as.matrix(DM)
+  if ((!as_dist) && (length(igraph::V(g)) < 1000)) {
+    DM <- as.matrix(DM)
+  }
   # names
-  colnames(DM) <- rownames(Q)
-  rownames(DM) <- colnames(DM)
+  colnames(DM) <- colnames(Pi)
+  rownames(DM) <- colnames(Pi)
+  class(DM) <- c("diffudist", class(DM))
   return(DM)
 }
-

@@ -50,14 +50,17 @@ Note that you can type abbreviations, e.g. "L", "N", "Q", "M" for the
 respective types (case is ignored). The argument match is done through
 \code{\link[strex]{match_arg}}.}
 
-\item{weights}{edge weights, representing the strength/intensity (not the cost!)
+\item{weights}{edge weights, representing the strength/intensity (not the
+cost!)
 of each link. If weights is NULL (the default) and g has an edge attribute
 called weight, then it will be used automatically.
-If this is NA then no weights are used (even if the graph has a weight attribute).}
+If this is NA then no weights are used (even if the graph has a weight
+attribute).}
 
-\item{as_dist}{If the function should return a matrix or an object of class "dist" as
-returned from [stats::as.dist]. Default is FALSE if the number of nodes is smaller
-than 1000.}
+\item{as_dist}{If the function should return a matrix or an object of class
+"dist" as
+returned from [stats::as.dist]. Default is FALSE if the number of nodes is
+smaller than 1000.}
 
 \item{verbose}{default TRUE}
 }
@@ -66,8 +69,8 @@ The diffusion distance matrix \eqn{D_t}, a square numeric matrix
   of the \eqn{L^2}-norm distances between posterior probability vectors, i.e.
   Euclidean distances between the rows of the stochastic matrix
   \eqn{P(t) = e^{-\tau L}}, where \eqn{-L = -(I - T)} is the generator of the
-  continuous-time random walk (Markov chain) of given \code{type} over network
-  \code{g}.
+  continuous-time random walk (Markov chain) of given \code{type} over
+  network \code{g}.
 }
 \description{
 Returns a matrix where each entry encodes the diffusion distance
@@ -75,8 +78,8 @@ between two nodes of a network.
 
 The diffusion distance at time \eqn{\tau} between nodes \eqn{i, j \in G}
 is defined as
-\deqn{D_{\tau}(i, j) = \vert \mathbf{p}(t|i) - \mathbf{p}(t|j) \vert_2}
-with \eqn{\mathbf{p}(t|i) = (e^{- \tau L})_{i\cdot} = \mathbf{e}_i e^{- \tau L}}
+\deqn{D_{\tau}(i, j) = \vert \mathbf{p}(t|i) - \mathbf{p}(t|j) \vert_2} with
+\eqn{\mathbf{p}(t|i) = (e^{- \tau L})_{i\cdot} = \mathbf{e}_i e^{- \tau L}}
 indicating the i-th row of the stochastic matrix \eqn{e^{- \tau L}} and
 representing the probability (row) vector of a random walk dynamics
 corresponding to the initial condition \eqn{\mathbf{e}_i}, i.e. the random
@@ -84,9 +87,9 @@ walker is in node \eqn{i} at time \eqn{\tau = 0} with probability 1.
 }
 \section{Functions}{
 \itemize{
-\item \code{getDistanceMatrix}: Old deprecated function
-}}
+\item \code{getDistanceMatrix()}: Old deprecated function
 
+}}
 \examples{
 g <- igraph::sample_pa(10, directed = FALSE)
 dm_crw <- get_distance_matrix(g, tau = 1)
@@ -97,8 +100,8 @@ De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of
   Functional Clusters in Collective Phenomena. Physical Review Letters.
   \doi{10.1103/PhysRevLett.118.168301}
 
-  Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and
-  interdependent systems. Physical Review E, 103(4), 042301.
+  Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex
+  and interdependent systems. Physical Review E, 103(4), 042301.
   \doi{10.1103/PhysRevE.103.042301}
   \href{https://arxiv.org/abs/2006.13032}{arXiv: 2006.13032}
 }

@@ -64,9 +64,9 @@ Returns a matrix where each entry encodes the diffusion probability between two 
 }
 \section{Functions}{
 \itemize{
-\item \code{getDiffusionProbabilityMatrix}: Old deprecated function
-}}
+\item \code{getDiffusionProbabilityMatrix()}: Old deprecated function
 
+}}
 \references{
 De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of
   Functional Clusters in Collective Phenomena. Physical Review Letters.

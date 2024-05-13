@@ -25,7 +25,11 @@ lambdas the eigenvalues of the Laplacian
 }
 \description{
 Returns the eigenvalue spectrum together with eigenvectors of a Laplacian
-corresponding to a network.
+corresponding to a network. This involves computing the eigendecomposition of
+a (symmetric) matrix, so it is computationally intense and may take some time.
+The decomposition of the normalized Laplacian \eqn{L = I - D^{-1}A} takes
+is computed through the decomposition of its symmetric version
+\eqn{L = D^{-\frac{1}{2}}AD^{-\frac{1}{2}}}. See the package vignette for details.
 }
 \references{
 Bertagnolli, G., & De Domenico, M. (2021). Diffusion geometry of multiplex and

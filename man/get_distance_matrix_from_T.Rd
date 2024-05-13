@@ -7,13 +7,13 @@
 \alias{get_DDM_from_Pi}
 \title{Diffusion distance matrix from a custom transition matrix}
 \usage{
-get_distance_matrix_from_T(Pi, tau, verbose = TRUE)
+get_distance_matrix_from_T(Pi, tau, as_dist = FALSE, verbose = TRUE)
 
-get_DDM_from_T(Pi, tau, verbose = TRUE)
+get_DDM_from_T(Pi, tau, as_dist = FALSE, verbose = TRUE)
 
-get_distance_matrix_from_Pi(Pi, tau, verbose = TRUE)
+get_distance_matrix_from_Pi(Pi, tau, as_dist = FALSE, verbose = TRUE)
 
-get_DDM_from_Pi(Pi, tau, verbose = TRUE)
+get_DDM_from_Pi(Pi, tau, as_dist = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{Pi}{a transition matrix (it should be a stochastic matrix)}
@@ -46,10 +46,6 @@ walker is in node \eqn{i} at time \eqn{\tau = 0} with probability 1.
 
 The Laplacian \eqn{L} is the normalised laplacian corresponding to the
 given transition matrix, i.e. \eqn{L = I - Pi}.
-}
-\examples{
-g <- igraph::sample_pa(10, directed = FALSE)
-dm <- get_distance_matrix(g, tau = 1)
 }
 \references{
 De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of

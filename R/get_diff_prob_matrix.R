@@ -52,6 +52,15 @@ get_laplacian <- function(g,  type = "Laplacian", weights = NULL, verbose = TRUE
       if (verbose) {
         cat("Weighted network. Using edge weights as connection strenghts.\n")
       }
+      if (!is.numeric(igraph::E(g)$weight)) {
+        cat("weight edge attribute is not numeric. Ignore weights.\n")
+        igraph::E(g)$weight <- 1
+      } else {
+        if (!all(E(g)$weight >= 0)) {
+          cat("Negative weights. Absolute value will be used.\n")
+          igraph::E(g)$weight <- abs(igraph::E(g)$weight)
+        }
+      }
     } else {
       # no (numeric) weight edge attribute
       if (verbose) {
@@ -207,7 +216,7 @@ get_diffusion_probability_matrix <- function(g, tau, type = "Normalized Laplacia
     )
   } else {
     tryCatch(
-      type <- type <- match.arg(toupper(type), types),
+      type <- match.arg(toupper(type), types),
       error = function(e) {
         cat(
           "ERROR! Wrong type of Laplacian, available types are:\n",

@@ -21,9 +21,9 @@ shortest-path (or geodesic) distance
 }
 \section{Functions}{
 \itemize{
-\item \code{getMeanDistanceMatrix}: Old deprecated function
-}}
+\item \code{getMeanDistanceMatrix()}: Old deprecated function
 
+}}
 \references{
 De Domenico, M. (2017). Diffusion Geometry Unravels the Emergence of
 Functional Clusters in Collective Phenomena. Physical Review Letters.

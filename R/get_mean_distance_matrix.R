@@ -19,7 +19,9 @@
 get_mean_distance_matrix <- function(DM_list){
     #DM.list is a simple list, where each element is a distance matrix
     M <- length(DM_list)
-    return( Reduce('+', DM_list) / M )
+    DM <- Reduce('+', DM_list) / M
+    class(DM) <- c("diffudist", class(DM))
+    return(DM)
 }
 
 #' @describeIn get_mean_distance_matrix Old deprecated function
